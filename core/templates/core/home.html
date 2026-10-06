@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="hero" aria-labelledby="welcome-heading">
+    <div class="hero-copy">
+      <p class="eyebrow"><span aria-hidden="true"></span> 留一点时间，给自己的成长</p>
+      <h1 id="welcome-heading">{{ welcome_message }}</h1>
+      <p class="hero-description">把学习计划、任务和知识记录放在一起。<br class="desktop-break">让目标更清晰，让每一步都有迹可循。</p>
+      <a class="button" href="#workspace">认识你的工作台 <span aria-hidden="true">↗</span></a>
+      <p class="hero-note">从一个目标，到一份属于你的知识积累。</p>
+    </div>
+    <div class="journey" aria-label="学习的三个步骤">
+      <div class="journey-heading"><span>一点一滴，慢慢积累</span><span class="leaf" aria-hidden="true">✳</span></div>
+      <ol class="journey-list">
+        <li><span class="step-number">01</span><div><h2>设定一个目标</h2><p>把“我想学”变成清晰的小步骤。</p></div></li>
+        <li><span class="step-number">02</span><div><h2>专注眼前这一小步</h2><p>今天的进展，也是值得记录的进展。</p></div></li>
+        <li><span class="step-number">03</span><div><h2>留下自己的收获</h2><p>让学过的知识，成为可以回看的积累。</p></div></li>
+      </ol>
+      <div class="journey-bottom"><span aria-hidden="true">↗</span> 按自己的节奏，持续向前</div>
+    </div>
+  </section>
+
+  <section id="workspace" class="workspace" aria-labelledby="workspace-heading">
+    <div class="section-heading"><div><p class="eyebrow">YOUR SPACE</p><h2 id="workspace-heading">一个地方，放下你的学习日常。</h2></div><span class="status">工作台正在准备中</span></div>
+    <div class="feature-grid">
+      <article class="feature-card"><span class="feature-icon" aria-hidden="true">✓</span><h3>学习计划与任务</h3><p>拆分学习目标，完成一个小任务，看见自己的进度。</p><span class="coming-soon">即将开放</span></article>
+      <article class="feature-card"><span class="feature-icon" aria-hidden="true">✎</span><h3>笔记与资料</h3><p>记录理解，收藏有用的链接，把知识整理成自己的语言。</p><span class="coming-soon">即将开放</span></article>
+      <article class="feature-card"><span class="feature-icon" aria-hidden="true">⌕</span><h3>搜索与学习回顾</h3><p>找回需要的内容，看看过去的积累，再决定下一步。</p><span class="coming-soon">即将开放</span></article>
+    </div>
+  </section>
+{% endblock %}
