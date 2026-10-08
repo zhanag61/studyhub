@@ -14,6 +14,8 @@ M1 将登录功能的规范放在 `specs/001-login/`：
 
 先确认 spec，再编写 plan 和 tasks；实现后逐条对照验收。文档与代码在同一分支、同一 PR 中更新。
 
+当前手工实例：[已确认的登录规范](../specs/001-login/spec.md)、[技术计划](../specs/001-login/plan.md)、[实施任务](../specs/001-login/tasks.md)。2026-10-09 M1-L02 已补齐三份文档，业务实施未开始；活动规范是 `001-login`，对应 Git 分支 `feat/001-login`。
+
 M0 的 `specs/000-bootstrap/` 保存本次用户已确认的起步准备范围，用于区分代码准备和用户亲手练习。
 
 ## 一个规范例子
