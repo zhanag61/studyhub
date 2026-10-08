@@ -26,7 +26,7 @@ M0-L03 已建立[公开 GitHub 源码仓库](https://github.com/zhanag61/studyhu
 
 真实部署 dep-db3jrtl9fdbs73e4a91g 已成功：构建日志记录内置迁移和静态文件收集成功；运行日志确认 Gunicorn gthread、两名 worker、0.0.0.0:10000；Neon 的只读查询核对 django_migrations 有 18 行。公开首页返回 200，两个标题正确；styles.7444a497f306.css 与 favicon.c363266dcd27.svg 均返回 200 及正确类型，安全响应头、/health/ JSON、公开 HTTP 跳 HTTPS 均通过。用户另行反馈电脑和手机可打开、约 5 秒；用户未逐项描述布局细节，也未实测闲置冷启动，这些不记录为完整验证。
 
-2026-10-08 核对官方说明：Render Free 闲置约 15 分钟会休眠，冷启动约一分钟，工作区每月 750 免费实例小时；文件系统不持久。本项目不使用 30 天到期的 Render Free PostgreSQL。Neon 官方 2026-10-02 公告列出 Free 每项目 1 GB、每月 100 CU-hours；实际选定账号套餐还需核对。[Render 免费限制](https://render.com/docs/free)、[Neon Free 公告](https://neon.com/blog/neon-free-plan-1-gb-per-project)。
+2026-10-08 核对官方说明：Render Free 闲置约 15 分钟会休眠，冷启动约一分钟，工作区每月 750 免费实例小时；文件系统不持久。本项目不使用 30 天到期的 Render Free PostgreSQL。Neon 官方 2026-10-02 公告列出 Free 每项目 1 GB、每月 100 CU-hours；实际选定账号已核对为 free_v3，1 GB 大小限制与公告一致。[Render 免费限制](https://render.com/docs/free)、[Neon Free 公告](https://neon.com/blog/neon-free-plan-1-gb-per-project)。
 
 未购买套餐或域名。本次只创建免费资源；构建、流量及计算额度仍需监测，接近限制时先评估，付费必须先核算总费用。默认休眠是测试版已知限制，不承诺全天即时访问。
 
