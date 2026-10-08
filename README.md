@@ -2,11 +2,14 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：M0 本地起步。** 已准备欢迎首页和完整课程路线。登录、计划、任务、笔记、搜索等业务功能将在对应课程实现。GitHub 远端仓库及线上地址尚未建立。
+**当前阶段：M0 起步。** 已准备欢迎首页和完整课程路线，[GitHub 源码仓库](https://github.com/zhanag61/studyhub)已建立。登录、计划、任务、笔记、搜索等业务功能将在对应课程实现；网站公开部署尚未执行。
+
+教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
 ## 先从哪里开始
 
 - 第一课：[亲手启动首页](docs/lessons/M0-L01.md)
+- GitHub 课程：[通过 PR 交付改动](docs/lessons/M0-L03.md)
 - 完整课程：[M0–M8 课程表](docs/CURRICULUM.md)
 - 可复制指令：[如何让 Agent 配合开发](docs/PROMPTS.md)
 - 当前状态：[课程日志](docs/LEARNING_LOG.md)
@@ -53,7 +56,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe manage.py makemigrations --check --dry-run
 ```
 
-GitHub Actions 已准备上述检查；推送到远端后才会实际运行。M1 加入账号行为测试时再加入测试任务，M4 再验证 PostgreSQL。
+GitHub Actions 已在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实际运行并通过上述检查；具体结果可查看 [Actions](https://github.com/zhanag61/studyhub/actions)。M1 加入账号行为测试时再加入测试任务，M4 再验证 PostgreSQL。
 
 ## 已确认的产品路线
 

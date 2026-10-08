@@ -1,66 +1,54 @@
-# Git 与 GitHub：每项小功能怎样保存和交付
+# Git 与 GitHub：让 Agent 保存和交付小功能
 
 Git 保存本地版本；GitHub 保存远端仓库，并提供 Issue、PR 和自动检查。分支让一项修改有自己的工作范围；PR 让改动可以比较和审查。
 
+## 默认分工
+
+按 2026-10-08 用户最新要求，你通过聊天提出需求、确认规范和在浏览器验收；Agent 检查分支、实现、测试、提交与准备 PR，再解释结果。Git 命令练习为选学。合并与发布按当前任务授权执行。
+
+账号登录或工具无法执行的网页动作，再由用户完成必要步骤。
+
 ## 当前状态
 
-Agent 已为起步交付准备 main 初始化基线。你从 M0-L01 的文案修改开始，在短期分支上完成自己的第一次提交；用 git log --oneline 查看当前版本。
+本地有 main 起步基线和 feat/m0-welcome-message 功能分支。个人文案已保存为提交 e9a8665，页面配色与课程调整另存一项提交。M0-L02 完成记录见 [课程日志](LEARNING_LOG.md)。
 
-GitHub 连接已核实，账号为 `zhanag61`。查询 `zhanag61/studyhub` 返回 404，尚不能认为远端仓库已经存在。GitHub CLI 未安装；课程使用网页与 Git Credential Manager，当前无需先装 gh。
+2026-10-08 已核实 GitHub 账号为 zhanag61，创建[公开仓库](https://github.com/zhanag61/studyhub)，配置 origin 并推送 main 与功能分支。[Issue #1](https://github.com/zhanag61/studyhub/issues/1) 记录目标，[PR #2](https://github.com/zhanag61/studyhub/pull/2) 交付首页改动。CI、审查和合并结果见课程日志。
 
-## M0-L02：提交文案修改
+本课交付采用 Squash and merge，并将本地 main 同步到远端合并结果。独立审查未发现实质问题，GitHub CI 实际通过。功能分支保留供用户查看首次 PR 的历史；后续功能从最新 main 建立新分支。
 
-先确认课程编号与分支，不直接复制后执行未知文件修改。
+## M0-L02：用聊天指令保存版本
 
-```powershell
-Set-Location 'D:\developer\studyhub'
-git status
-git diff -- core/views.py
-git add core/views.py
-git diff --cached
-git commit -m "feat: personalize the welcome message"
-```
+详细说明见 [M0-L02](lessons/M0-L02.md)。你可以这样发指令：
 
-- `diff` 看尚未暂存的内容。
-- `add` 选定本次提交的文件。
-- `diff --cached` 检查真正准备提交的差异。
-- `commit` 保存一个可解释的版本。
+> 检查当前分支和差异，把已验收的本课改动保存为提交。个人文案与页面配色分开保存。由你执行 Git，告诉我提交编号、保存内容、检查结果和工作区状态。
 
-提交后检查 `git status` 和 `git log --oneline -3`。如果还有课程日志修改，先确认其归属，再用明确文件名暂存。
+Agent 核对文件、检查差异并提交，不能只交付命令清单。代码、页面和课程记录按实际归属保存，不提交虚拟环境、数据库或密钥。
+
+本项目曾遇到不同 Windows 账户引起的 detected dubious ownership，用户已信任指定项目。修复记录保留在 M0-L02；不要求重复设置。
 
 ## M0-L03：建立远端与第一次 PR
 
-在 GitHub 网页创建公开仓库，名称 `studyhub`。由于本地已经有文件，新仓库不勾选自动生成 README、.gitignore 或许可证。若仓库已存在，先由 Agent 检查，不覆盖。
+本课真实过程和概念见 [M0-L03](lessons/M0-L03.md)。以下是后续功能可复用的参考，不要再次创建同名仓库或重复添加 origin。
 
-确认仓库创建成功后，输入 PowerShell：
+发到聊天：
 
-```powershell
-git remote add origin https://github.com/zhanag61/studyhub.git
-git push -u origin main
-git push -u origin feat/m0-welcome-message
-```
+> 开始 StudyHub 的 GitHub 课程。先检查本地状态、当前 GitHub 账号和 studyhub 仓库是否存在，再建立已确认的公开仓库、推送 main 和功能分支、创建 Issue 与 PR。由你执行可用工具和 Git 操作，解释分支与 PR 的作用；我查看页面和差异。需要账号登录或工具无法执行的网页步骤时再指导我。
 
-按 Git Credential Manager 的浏览器登录流程认证；不用把密码或 token 贴到聊天。若 origin 已存在，先读 `git remote -v` 核实，不能重复添加。
+Agent 应优先用可用工具完成工作。若必须由用户网页建仓，只指导必要步骤：创建公开的 studyhub 仓库；本地已有文件时，新远端不自动生成 README、.gitignore 或许可证。已有同名仓库先检查内容，不能覆盖。
 
-网页上先创建文案修改 Issue，写清问题和验收结果。再创建 PR：base 为 main，compare 为 feat/m0-welcome-message。
+确认远端仓库后，Agent 添加或核实 origin，推送 main 和功能分支。登录通过 Git Credential Manager 或已连接工具完成，不要求用户在聊天中提供密码或 token。
 
-使用仓库模板补全实际验证结果，关联真实 Issue 编号。查看 Files changed，学习逐行比较；查看 Actions 的真实检查结果。
+Issue 记录本次目标和验收；PR 的 base 为 main，compare 为 feat/m0-welcome-message。PR 描述使用实际验证结果并关联真实 Issue。推送后查看 GitHub Actions 的真实结果，由另一位 Agent 按规范审查，你在浏览器验收。
 
-由 Agent 审查、你亲手验收后，在网页选择 **Squash and merge**。合并后：
-
-```powershell
-git switch main
-git pull --ff-only origin main
-git status
-```
-
-确认远端合并已在本地 main 中，并且工作区干净。再删除已经完成的功能分支；如果 Git 对 squash 合并后的分支删除提出提示，交给 Agent 核对提交内容，不盲目强制删除。
+完成授权的 Squash and merge 后，Agent 同步本地 main 并验证内容和工作区。删除功能分支前核对合并结果；squash 合并后可能需要进一步确认分支提交内容是否已包含。
 
 ## 后续功能的循环
 
 Issue → 从最新 main 建分支 → 写规范、计划、任务 → 小步实现 → 验收与提交 → 推送 → PR → 审查和修复 → 合并 → 同步 main。
 
-例如创建学习计划时：
+你负责描述可见行为和验收条件，Agent 完成机械操作。一项功能可以包含多个小提交，每次保存应有清楚的范围和说明。
+
+命令供选学，以下操作默认由 Agent 检查工作区后执行：
 
 ```powershell
 git status
@@ -69,10 +57,8 @@ git pull --ff-only origin main
 git switch -c feat/002-plan-create
 ```
 
-只有工作区状态和上一个功能处理完毕后才进入这组操作。一次提交可以小于一项功能，但应当描述一个清楚的结果。
-
 ## 单人仓库规则
 
-检查实际运行后，再设置 main 必须通过 PR 与 Django 检查。不要设置只有另一个真人才能满足的必需批准人数；Agent 的代码审查与 GitHub 真人批准是不同步骤。
+CI 实际运行后，再设置 main 所需检查。Agent 代码审查与 GitHub 真人批准分别记录；单人项目不设置无法自行满足的真人批准人数。
 
 参考：[GitHub flow](https://docs.github.com/en/get-started/using-github/github-flow)。
