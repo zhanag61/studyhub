@@ -2,7 +2,7 @@
 
 ## 当前状态
 
-M0-L04 已准备正式服务器、静态文件、HTTPS、PostgreSQL 环境配置与检查。Render 和 Neon 的工具连接已可用；尚需用户确认 Render「My Workspace」并提供专用于 StudyHub 的 Neon 项目页面网址。当前没有真实上线网址，也没有创建 Render 服务；不能据此认定已经上线。
+M0-L04 已准备正式服务器、静态文件、HTTPS、PostgreSQL 环境配置与检查。Render 和 Neon 的工具连接已可用；用户已确认 Render「My Workspace」，工具核对该工作区尚无服务。用户正按网页步骤创建专用于 StudyHub 的 Neon Free 项目，需提供项目页面网址。当前没有真实上线网址，也没有创建 Render 服务；不能据此认定已经上线。
 
 M0-L03 已建立[公开 GitHub 源码仓库](https://github.com/zhanag61/studyhub)并推送，首页修改通过 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 交付，GitHub CI 实际运行通过。建仓与 Git 操作已由 Agent 使用现有登录执行；用户主要确认需求并验收。源码公开与网站上线分别记录。
 
@@ -20,7 +20,7 @@ M0-L03 已建立[公开 GitHub 源码仓库](https://github.com/zhanag61/studyhu
 
 ## 当前验证与免费限制
 
-本地开发配置、迁移一致性和依赖检查通过。Windows 正式 WSGI 请求检查通过：首页、散列 CSS/图标、内部健康检查、HTTPS 转发与错误域名；缺少密钥/数据库或配置错误时按预期失败。此检查使用占位数据库，不代表连接 Neon 成功。真实 Linux Gunicorn 与临时 PostgreSQL 迁移由本次 PR 的 CI 提供证据，结果写入课程日志。
+本地开发配置、迁移一致性和依赖检查通过。Windows 正式 WSGI 请求检查通过：首页、散列 CSS/图标、内部健康检查、HTTPS 转发与错误域名；缺少密钥/数据库或配置错误时按预期失败。此检查使用占位数据库，不代表连接 Neon 成功。[PR #4](https://github.com/zhanag61/studyhub/pull/4) 的 [CI run 37739376003](https://github.com/zhanag61/studyhub/actions/runs/37739376003) 已实际通过 Linux Gunicorn 启动、正式请求、临时 PostgreSQL 迁移和查询。独立 Agent 审查未发现实质问题。两者均不代表实际 Render/Neon 已上线。
 
 2026-10-08 核对官方说明：Render Free 闲置约 15 分钟会休眠，冷启动约一分钟，工作区每月 750 免费实例小时；文件系统不持久。本项目不使用 30 天到期的 Render Free PostgreSQL。Neon 官方 2026-10-02 公告列出 Free 每项目 1 GB、每月 100 CU-hours；实际选定账号套餐还需核对。[Render 免费限制](https://render.com/docs/free)、[Neon Free 公告](https://neon.com/blog/neon-free-plan-1-gb-per-project)。
 
