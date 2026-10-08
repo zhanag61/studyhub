@@ -4,7 +4,7 @@
 
 本地源码和依赖已准备；没有线上网址，没有创建 Render 服务或 Neon 数据库，免费额度与国内网络体验尚未实际验证。
 
-GitHub 连接可读，但 `zhanag61/studyhub` 查询返回 404；M0-L03 先完成远端仓库建立与推送。当前可用连接工具不提供新建仓库操作，网页建仓也正是该课的亲手练习。
+M0-L03 已建立[公开 GitHub 源码仓库](https://github.com/zhanag61/studyhub)并推送，首页修改通过 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 交付，GitHub CI 实际运行通过。建仓与 Git 操作已由 Agent 使用现有登录执行；用户主要确认需求并验收。源码公开与网站上线分别记录。
 
 ## M0-L04：空站访问验证
 

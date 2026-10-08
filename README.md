@@ -56,7 +56,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe manage.py makemigrations --check --dry-run
 ```
 
-GitHub Actions 已准备上述检查；推送到远端后才会实际运行。M1 加入账号行为测试时再加入测试任务，M4 再验证 PostgreSQL。
+GitHub Actions 已在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实际运行并通过上述检查；具体结果可查看 [Actions](https://github.com/zhanag61/studyhub/actions)。M1 加入账号行为测试时再加入测试任务，M4 再验证 PostgreSQL。
 
 ## 已确认的产品路线
 

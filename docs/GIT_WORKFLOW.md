@@ -14,6 +14,8 @@ Git 保存本地版本；GitHub 保存远端仓库，并提供 Issue、PR 和自
 
 2026-10-08 已核实 GitHub 账号为 zhanag61，创建[公开仓库](https://github.com/zhanag61/studyhub)，配置 origin 并推送 main 与功能分支。[Issue #1](https://github.com/zhanag61/studyhub/issues/1) 记录目标，[PR #2](https://github.com/zhanag61/studyhub/pull/2) 交付首页改动。CI、审查和合并结果见课程日志。
 
+本课交付采用 Squash and merge，并将本地 main 同步到远端合并结果。独立审查未发现实质问题，GitHub CI 实际通过。功能分支保留供用户查看首次 PR 的历史；后续功能从最新 main 建立新分支。
+
 ## M0-L02：用聊天指令保存版本
 
 详细说明见 [M0-L02](lessons/M0-L02.md)。你可以这样发指令：
