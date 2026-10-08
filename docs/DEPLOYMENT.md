@@ -20,7 +20,7 @@ M0-L03 已建立[公开 GitHub 源码仓库](https://github.com/zhanag61/studyhu
 
 ## 当前验证与免费限制
 
-本地开发配置、迁移一致性和依赖检查通过。Windows 正式 WSGI 请求检查通过：首页、散列 CSS/图标、内部健康检查、HTTPS 转发与错误域名；缺少密钥/数据库或配置错误时按预期失败。此检查使用占位数据库，不代表连接 Neon 成功。[PR #4](https://github.com/zhanag61/studyhub/pull/4) 的 [CI run 37739376003](https://github.com/zhanag61/studyhub/actions/runs/37739376003) 已实际通过 Linux Gunicorn 启动、正式请求、临时 PostgreSQL 迁移和查询。独立 Agent 审查未发现实质问题。两者均不代表实际 Render/Neon 已上线。
+本地开发配置、迁移一致性和依赖检查通过。Windows 正式 WSGI 请求检查通过：首页、散列 CSS/图标、内部健康检查、HTTPS 转发与错误域名；缺少密钥/数据库或配置错误时按预期失败。此检查使用占位数据库，不代表连接 Neon 成功。[PR #4](https://github.com/zhanag61/studyhub/pull/4) 的初次 CI run 37739376003 和[最终 CI run 37739647375](https://github.com/zhanag61/studyhub/actions/runs/37739647375) 均实际通过 Linux Gunicorn 启动、正式请求、临时 PostgreSQL 迁移和查询。独立 Agent 审查未发现实质问题，PR 已 squash 合并为 main 的 2b0efbf，本地已同步。两者均不代表实际 Render/Neon 已上线。
 
 2026-10-08 核对官方说明：Render Free 闲置约 15 分钟会休眠，冷启动约一分钟，工作区每月 750 免费实例小时；文件系统不持久。本项目不使用 30 天到期的 Render Free PostgreSQL。Neon 官方 2026-10-02 公告列出 Free 每项目 1 GB、每月 100 CU-hours；实际选定账号套餐还需核对。[Render 免费限制](https://render.com/docs/free)、[Neon Free 公告](https://neon.com/blog/neon-free-plan-1-gb-per-project)。
 
