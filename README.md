@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：M0-L04 已上线并收到用户电脑、手机访问通过的反馈；下一课 M1-L01 登录规范。** [打开 StudyHub 首页](https://studyhub-pt86.onrender.com/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。正式服务使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。登录、计划、任务、笔记、搜索等业务功能将在对应课程实现。
+**当前阶段：M1-L01 正在确认登录规范；M0 首页已上线并收到电脑、手机访问通过的反馈。** [打开 StudyHub 首页](https://studyhub-pt86.onrender.com/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。正式服务使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。登录业务尚未实现，后续功能按课程推进。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
@@ -11,6 +11,7 @@
 - 第一课：[亲手启动首页](docs/lessons/M0-L01.md)
 - GitHub 课程：[通过 PR 交付改动](docs/lessons/M0-L03.md)
 - 部署课程：[把首页放到线上](docs/lessons/M0-L04.md)
+- 当前课程：[确认登录规范](docs/lessons/M1-L01.md)
 - 完整课程：[M0–M8 课程表](docs/CURRICULUM.md)
 - 可复制指令：[如何让 Agent 配合开发](docs/PROMPTS.md)
 - 当前状态：[课程日志](docs/LEARNING_LOG.md)
