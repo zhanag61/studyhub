@@ -27,3 +27,36 @@ jobs:
       - name: Check migration consistency
         run: python manage.py makemigrations --check --dry-run
       # M1 增加真实账号行为测试后，再加入测试步骤。
+
+  deployment-smoke:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: studyhub_ci
+          POSTGRES_PASSWORD: disposable_ci_password
+          POSTGRES_DB: studyhub_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      # 仅供本次任务的临时数据库，不是线上凭据。
+      DATABASE_URL: postgresql://studyhub_ci:disposable_ci_password@127.0.0.1:5432/studyhub_ci
+      DJANGO_DB_SSL_REQUIRED: 'false'
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13.14'
+          cache: pip
+      - name: Install pinned dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Check production requests, Gunicorn, assets and PostgreSQL migrations
+        run: python scripts/check_deployment.py --postgres
