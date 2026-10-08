@@ -12,7 +12,7 @@ Git 保存本地版本；GitHub 保存远端仓库，并提供 Issue、PR 和自
 
 本地有 main 起步基线和 feat/m0-welcome-message 功能分支。个人文案已保存为提交 e9a8665，页面配色与课程调整另存一项提交。M0-L02 完成记录见 [课程日志](LEARNING_LOG.md)。
 
-当前没有配置 Git 远端。起步时核实的 GitHub 账号为 zhanag61，当时 studyhub 仓库查询返回 404；M0-L03 建仓前须重新核对账号和仓库是否存在。
+2026-10-08 已核实 GitHub 账号为 zhanag61，创建[公开仓库](https://github.com/zhanag61/studyhub)，配置 origin 并推送 main 与功能分支。[Issue #1](https://github.com/zhanag61/studyhub/issues/1) 记录目标，[PR #2](https://github.com/zhanag61/studyhub/pull/2) 交付首页改动。CI、审查和合并结果见课程日志。
 
 ## M0-L02：用聊天指令保存版本
 
@@ -25,6 +25,8 @@ Agent 核对文件、检查差异并提交，不能只交付命令清单。代�
 本项目曾遇到不同 Windows 账户引起的 detected dubious ownership，用户已信任指定项目。修复记录保留在 M0-L02；不要求重复设置。
 
 ## M0-L03：建立远端与第一次 PR
+
+本课真实过程和概念见 [M0-L03](lessons/M0-L03.md)。以下是后续功能可复用的参考，不要再次创建同名仓库或重复添加 origin。
 
 发到聊天：
 
