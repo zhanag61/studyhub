@@ -151,6 +151,18 @@ GitHub PR CI 已实际通过：首轮 run 37735201014，以及加入本课文档
 
 继续核对服务创建/部署日志、公开 HTTPS 首页与散列静态文件，随后让用户完成电脑普通网络与手机验收。若用户仍卡在 Neon 页面，先按其页面标题和按钮文字继续教学；不要索要连接串或要求重做 Git。尚无真实线上地址，没有新增付费购买；M0-L04 部署与用户验收保持待办，M1 尚未开始。
 
+## 2026-10-08 · M0-L04 Render + Neon 实际上线
+
+用户提供 Neon 项目页面网址：https://console.neon.tech/app/projects/green-fire-18526792/branches/br-sparkling-tree-b35byzmm。Agent 实际核对：项目名 studyhub，region=aws-ap-southeast-1，PostgreSQL 18，owner.subscription_type=free_v3；默认分支 production 与用户网址一致，数据库 neondb。已通过工具取得直接连接串，生成随机持久密钥，只在内存中传给服务环境，未打印或提交凭据。
+
+在已确认的 My Workspace 创建 Render 服务 studyhub，id=srv-db3jrsl9fdbs73e4a5c0，Free、Singapore，main 分支自动部署。实际首次部署 dep-db3jrtl9fdbs73e4a91g 使用 main=2b0efbf，2026-10-08 14:54:47（北京时间）状态 live。日志确认静态文件构建、Django 内置迁移、Gunicorn gthread 两名 worker 和 10000 端口成功；Neon 只读 SQL 核对 django_migrations 18 行。
+
+真实公开网址：https://studyhub-pt86.onrender.com/。Agent 从本机运行实际网络请求，首页返回 200 且两个标题正确，散列 CSS 和 SVG 返回 200/正确类型，HSTS 与 frame 限制、/health/ JSON、HTTP 转 HTTPS 均通过。Web 浏览工具不能访问该 URL，但本机直接 HTTPS 验证已成功；这两类工具结果不混淆。没有新增付费套餐或域名，没有真实测试者或业务数据。
+
+实际连接工具不能设置 Render healthCheckPath，当前平台使用默认 TCP 检查；/health/ 端点已验证，HTTP 检查配置留作后续改进。用户已收到真实 URL 和电脑普通网络/手机验收请求，尚未反馈；不将 Agent 请求记成用户完成。当前 T001–T007 技术与记录已完成，U001 待反馈，M1 未开始。
+
+恢复后的第一步：读取本段、Git 状态和部署记录，确认用户实际访问反馈；若失败按具体网络/样式证据排查。验收后进入 M1-L01 手工登录规范，只确认使用场景与验收例子，暂不实现业务代码或引入 Spec Kit。
+
 ## 后续记录格式
 
 日期 / 课程编号；用户目标；确认的决定；Agent 实现与检查证据；用户实际操作与验收；Git 分支、提交或 PR；用户已解释的概念；未解决问题；下一课第一步。

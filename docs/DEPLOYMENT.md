@@ -2,7 +2,9 @@
 
 ## 当前状态
 
-M0-L04 已准备正式服务器、静态文件、HTTPS、PostgreSQL 环境配置与检查。Render 和 Neon 的工具连接已可用；用户已确认 Render「My Workspace」，工具核对该工作区尚无服务。用户正按网页步骤创建专用于 StudyHub 的 Neon Free 项目，需提供项目页面网址。当前没有真实上线网址，也没有创建 Render 服务；不能据此认定已经上线。
+M0-L04 已实际上线：[StudyHub 首页](https://studyhub-pt86.onrender.com/)。2026-10-08 14:54（北京时间）Render 部署状态为 live，运行版本为 main 的 2b0efbf。Agent 已从本机实际请求验证首页、两个散列静态文件、健康检查和 HTTP → HTTPS。用户的电脑普通网络与手机验收尚待反馈，不能记为已通过。
+
+Render 使用用户确认的 My Workspace，服务为 studyhub，Singapore、Free：[服务控制台](https://dashboard.render.com/web/srv-db3jrsl9fdbs73e4a5c0)。Neon 使用用户创建的 [studyhub 项目](https://console.neon.tech/app/projects/green-fire-18526792/branches/br-sparkling-tree-b35byzmm)，AWS Singapore，实际订阅为 free_v3，PostgreSQL 18，默认分支 production，数据库 neondb。没有新购付费套餐或域名。
 
 M0-L03 已建立[公开 GitHub 源码仓库](https://github.com/zhanag61/studyhub)并推送，首页修改通过 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 交付，GitHub CI 实际运行通过。建仓与 Git 操作已由 Agent 使用现有登录执行；用户主要确认需求并验收。源码公开与网站上线分别记录。
 
@@ -14,13 +16,15 @@ M0-L03 已建立[公开 GitHub 源码仓库](https://github.com/zhanag61/studyhu
 
 部署前检查是否已有同名资源，避免重复创建。Neon 项目必须是已确认的 Free 项目；数据库初始化使用**直接连接**，主机名不带 `-pooler`。当前仅两名 Gunicorn worker，连接在请求结束时释放，先复用直接连接；后续业务需要连接池时，另配直接迁移连接，不把迁移送往池化连接。线上数据库要求 TLS；CI 的一次性本机 PostgreSQL 单独关闭 TLS。
 
-直接创建服务时在环境配置注入 `PYTHON_VERSION=3.13.14`、`DJANGO_DEBUG=false`、随机持久密钥和数据库连接串。已有服务更新环境变量必须合并，不覆盖其他变量。Blueprint 定义 `/health/` 检查路径；连接工具若不能设置该字段，记录实际默认检查方式及这项配置待办。`/health/` 仅检查应用进程，M4 再规划数据库就绪检查。
+直接创建服务时在环境配置注入 `PYTHON_VERSION=3.13.14`、`DJANGO_DEBUG=false`、随机持久密钥和数据库连接串。已有服务更新环境变量必须合并，不覆盖其他变量。Blueprint 定义 `/health/` 检查路径；实际连接工具创建不支持该字段，服务的 healthCheckPath 为空，当前使用平台默认 TCP 检查。`/health/` 已公开验证返回 200 和进程状态；后续可在服务设置改为 HTTP 检查，M4 再规划数据库就绪检查。
 
 记录真实部署地址、时间、使用套餐、费用和国内普通网络访问结果。分别测试首次打开、刷新、页面样式和手机打开。若失败，记录错误证据并调整这一部署步骤；不能把有代码写成已上线。
 
 ## 当前验证与免费限制
 
-本地开发配置、迁移一致性和依赖检查通过。Windows 正式 WSGI 请求检查通过：首页、散列 CSS/图标、内部健康检查、HTTPS 转发与错误域名；缺少密钥/数据库或配置错误时按预期失败。此检查使用占位数据库，不代表连接 Neon 成功。[PR #4](https://github.com/zhanag61/studyhub/pull/4) 的初次 CI run 37739376003 和[最终 CI run 37739647375](https://github.com/zhanag61/studyhub/actions/runs/37739647375) 均实际通过 Linux Gunicorn 启动、正式请求、临时 PostgreSQL 迁移和查询。独立 Agent 审查未发现实质问题，PR 已 squash 合并为 main 的 2b0efbf，本地已同步。两者均不代表实际 Render/Neon 已上线。
+本地开发配置、迁移一致性和依赖检查通过。Windows 正式 WSGI 请求检查通过：首页、散列 CSS/图标、内部健康检查、HTTPS 转发与错误域名；缺少密钥/数据库或配置错误时按预期失败。该项使用占位数据库。[PR #4](https://github.com/zhanag61/studyhub/pull/4) 的初次 CI run 37739376003 和[最终 CI run 37739647375](https://github.com/zhanag61/studyhub/actions/runs/37739647375) 均实际通过 Linux Gunicorn 启动、正式请求、临时 PostgreSQL 迁移和查询。独立 Agent 审查未发现实质问题，PR 已 squash 合并为 main 的 2b0efbf，本地已同步。
+
+真实部署 dep-db3jrtl9fdbs73e4a91g 已成功：构建日志记录内置迁移和静态文件收集成功；运行日志确认 Gunicorn gthread、两名 worker、0.0.0.0:10000；Neon 的只读查询核对 django_migrations 有 18 行。公开首页返回 200，两个标题正确；styles.7444a497f306.css 与 favicon.c363266dcd27.svg 均返回 200 及正确类型，安全响应头、/health/ JSON、公开 HTTP 跳 HTTPS 均通过。此为 Agent 本机网络请求，尚未记录用户国内普通网络、手机或闲置冷启动实测。
 
 2026-10-08 核对官方说明：Render Free 闲置约 15 分钟会休眠，冷启动约一分钟，工作区每月 750 免费实例小时；文件系统不持久。本项目不使用 30 天到期的 Render Free PostgreSQL。Neon 官方 2026-10-02 公告列出 Free 每项目 1 GB、每月 100 CU-hours；实际选定账号套餐还需核对。[Render 免费限制](https://render.com/docs/free)、[Neon Free 公告](https://neon.com/blog/neon-free-plan-1-gb-per-project)。
 
@@ -32,7 +36,7 @@ M0-L03 已建立[公开 GitHub 源码仓库](https://github.com/zhanag61/studyhu
 
 Render 免费实例会休眠，本地 SQLite 和上传文件不能用来保存测试者数据。不能选用会到期的免费数据库，然后假设它能永久保存数据。
 
-Neon 免费额度在正式开通时再次核对。记录存储与计算使用量，超限前评估是否减少负载或升级；公开测试版接受已说明的冷启动，但必须保持正确的数据保存与权限行为。
+Neon 当前 Free 订阅已通过项目 API 核对；正式邀测前再次核对额度。记录存储与计算使用量，超限前评估是否减少负载或升级；公开测试版接受已说明的冷启动，但必须保持正确的数据保存与权限行为。
 
 预算是每月新增费用约 50 元，域名与其他服务也计入。当前没有购买域名、套餐或 API。付费前先列清总费用与可能超量部分。
 
@@ -51,6 +55,6 @@ Neon 免费额度在正式开通时再次核对。记录存储与计算使用量
 
 | 日期 | 版本 / commit | 地址 | 托管与套餐 | 数据库 | 实际验收 | 费用 |
 |---|---|---|---|---|---|---|
-| 尚未发布 | — | — | — | — | 未运行 | 0 元新增购买 |
+| 2026-10-08 | 2b0efbf / M0 欢迎页 | [公开首页](https://studyhub-pt86.onrender.com/) | Render Free / Singapore | Neon Free / PG18 | Agent 请求和迁移通过；用户电脑/手机待反馈 | 0 元新增购买，持续监测免费额度 |
 
 官方参考：[Render 免费服务](https://render.com/docs/free)、[Neon 免费额度](https://neon.com/blog/neon-free-plan-1-gb-per-project)。
