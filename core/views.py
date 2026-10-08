@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 # 第一课的小练习：修改引号里的文字，保存后刷新浏览器。
-WELCOME_MESSAGE = "今天，从一个小目标开始。"
+WELCOME_MESSAGE = "今天，给自己的成长留一点时间。"
 
 
 def home(request):
