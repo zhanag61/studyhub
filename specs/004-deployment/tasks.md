@@ -19,7 +19,7 @@
 - [x] T004 本地请求通过；Linux CI run 37739376003 的真实 Gunicorn、临时 PostgreSQL 迁移与查询通过。
 - [x] T005 PR #4 通过 CI 和独立审查后 squash 合并；main=2b0efbf，本地与 origin/main 一致。
 - [x] T006 用户创建 Neon Free 项目后，Agent 创建 Render Free 服务；部署 live，真实首页/资源/HTTPS/健康检查与 Neon 18 项迁移核对通过。
-- [ ] U001 用户实际网络与手机验收。
+- [x] U001 用户反馈电脑和手机均可打开，约 5 秒；未将其记作闲置冷启动实测。
 - [x] T007 已记录本轮准备、检查与合并；实际上线和用户反馈到达后继续追加记录。
 
-用户已确认 Render My Workspace 并提供 Neon 项目网址；实际套餐分别为 Free 与 free_v3。PR #4 的最终 CI run 37739647375 通过，独立 Agent 审查无实质问题，已合并为 2b0efbf。公开网址为 https://studyhub-pt86.onrender.com/，上线与 Agent 验证完成，U001 用户电脑普通网络与手机反馈仍待完成。实际 Render 健康检查为默认 TCP；/health/ 端点可用，HTTP 检查路径设置留作后续改进。
+用户已确认 Render My Workspace 并提供 Neon 项目网址；实际套餐分别为 Free 与 free_v3。PR #4 的最终 CI run 37739647375 通过，独立 Agent 审查无实质问题，已合并为 2b0efbf。公开网址为 https://studyhub-pt86.onrender.com/，上线与 Agent 验证完成，用户反馈电脑和手机均可打开、约 5 秒，本课目标完成。实际 Render 健康检查为默认 TCP；/health/ 端点可用，HTTP 检查路径设置留作后续改进，不宣称 Blueprint 的全部字段已实际应用。
