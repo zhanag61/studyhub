@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：M0-L04 部署准备。** 欢迎首页和 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)已交付；现已加入 Render Free + Neon PostgreSQL 的部署配置和正式请求检查。真实上线状态见[部署记录](docs/DEPLOYMENT.md)。登录、计划、任务、笔记、搜索等业务功能将在对应课程实现。
+**当前阶段：M0-L04 已上线并收到用户电脑、手机访问通过的反馈；下一课 M1-L01 登录规范。** [打开 StudyHub 首页](https://studyhub-pt86.onrender.com/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。正式服务使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。登录、计划、任务、笔记、搜索等业务功能将在对应课程实现。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 

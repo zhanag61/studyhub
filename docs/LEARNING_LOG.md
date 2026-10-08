@@ -2,12 +2,11 @@
 
 ## 当前状态
 
-- 当前课程：M0-L03 技术交付完成；用户 GitHub 页面查看与概念理解待反馈，命令练习为选学。
-- 下一步：用户查看 PR #2 的差异与检查结果；下一课 M0-L04 核查托管与访问条件，尝试部署空页面。
-- 本地 Git：main 基线为 68999b2；个人文案提交为 e9a8665；界面示范与教学方式调整另存一项提交，具体编号以 git log 为准。
-- 当前分支：main，与 origin/main 同步；feat/m0-welcome-message 保留供查看首次 PR 历史，后续功能从最新 main 建新分支。
-- GitHub：账号 zhanag61；公开仓库 https://github.com/zhanag61/studyhub 已建立。PR #2 经实际 CI 与独立审查后 squash 合并，Issue #1 随合并关闭。
-- 线上部署：尚未执行。
+- 当前课程：M0-L04 实际上线和电脑/手机访问目标完成；用户反馈两种设备均可打开、约 5 秒。
+- 下一步：M1-L01 手工写登录需求规范，先确认行为和验收例子，不实现业务代码。
+- Git：部署实现经 PR #4 合并为 2b0efbf；本轮上线与用户反馈记录在 PR #5。恢复时先核对 git status 和 git log，日常从最新 main 建短期功能分支。
+- GitHub：账号 zhanag61；公开仓库 https://github.com/zhanag61/studyhub；首次首页 PR #2 和部署 PR #4 已交付。
+- 线上部署：https://studyhub-pt86.onrender.com/；Render Free + Neon Free，首次部署和真实请求验证成功。
 - M1–M8：尚未开始，业务功能尚未实现。
 - Spec Kit：未安装，按路线在 M2 引入。
 
@@ -142,6 +141,36 @@ GitHub PR CI 已实际通过：首轮 run 37735201014，以及加入本课文档
 用户明确确认「使用 My Workspace」，工具列出该工作区尚无服务。用户反馈不会建立 Neon 项目；Agent 说明现有连接无创建项目能力，并给出控制台四步教学：创建 Free 的 studyhub 项目、AWS Singapore、其他默认，完成后只提供项目页面网址。该步骤是当前工具限制，需要用户网页点选；不是重复账号授权，也不是要求执行终端命令。
 
 待项目 ID 确认后由 Agent 取得连接串、注入环境、执行迁移并创建 Render Free 服务。没有真实 URL 前，T006、U001 保持待办。当前没有购买收费服务，用户实际访问验收与上线状态尚未确认。
+
+## 2026-10-08 · M0-L04 准备代码已合并，上线待项目 ID
+
+最终 PR head=d046beb；CI run 37739647375 两个 job 全部成功。Agent 使用指定 head SHA 将 PR #4 squash 合并为 2b0efbfc01477bc094b1dc475b29510f0bf6ce4a，并正常 fast-forward 拉取本地 main；核对 HEAD=origin/main，工作区干净。部署 Issue #3 保持开放，因为实际资源与用户验收尚未完成。
+
+当前可恢复的第一步：收到专用 Neon Free 项目页面网址后，从网址取得项目 ID，用连接工具核对项目和默认分支，安全获取直接连接串；再在已确认的 Render 工作区 tea-db3jf6l9fdbs73e2tmu0 创建 Free 服务。main 的构建命令为 bash scripts/render-build.sh，启动命令为 bash scripts/render-start.sh，Python 固定 3.13.14。密钥只进入服务环境，不打印或提交。
+
+继续核对服务创建/部署日志、公开 HTTPS 首页与散列静态文件，随后让用户完成电脑普通网络与手机验收。若用户仍卡在 Neon 页面，先按其页面标题和按钮文字继续教学；不要索要连接串或要求重做 Git。尚无真实线上地址，没有新增付费购买；M0-L04 部署与用户验收保持待办，M1 尚未开始。
+
+## 2026-10-08 · M0-L04 Render + Neon 实际上线
+
+用户提供 Neon 项目页面网址：https://console.neon.tech/app/projects/green-fire-18526792/branches/br-sparkling-tree-b35byzmm。Agent 实际核对：项目名 studyhub，region=aws-ap-southeast-1，PostgreSQL 18，owner.subscription_type=free_v3；默认分支 production 与用户网址一致，数据库 neondb。已通过工具取得直接连接串，生成随机持久密钥，只在内存中传给服务环境，未打印或提交凭据。
+
+在已确认的 My Workspace 创建 Render 服务 studyhub，id=srv-db3jrsl9fdbs73e4a5c0，Free、Singapore，main 分支自动部署。实际首次部署 dep-db3jrtl9fdbs73e4a91g 使用 main=2b0efbf，2026-10-08 14:54:47（北京时间）状态 live。日志确认静态文件构建、Django 内置迁移、Gunicorn gthread 两名 worker 和 10000 端口成功；Neon 只读 SQL 核对 django_migrations 18 行。
+
+真实公开网址：https://studyhub-pt86.onrender.com/。Agent 从本机运行实际网络请求，首页返回 200 且两个标题正确，散列 CSS 和 SVG 返回 200/正确类型，HSTS 与 frame 限制、/health/ JSON、HTTP 转 HTTPS 均通过。Web 浏览工具不能访问该 URL，但本机直接 HTTPS 验证已成功；这两类工具结果不混淆。没有新增付费套餐或域名，没有真实测试者或业务数据。
+
+实际连接工具不能设置 Render healthCheckPath，当前平台使用默认 TCP 检查；/health/ 端点已验证，HTTP 检查配置留作后续改进。用户已收到真实 URL 和电脑普通网络/手机验收请求，尚未反馈；不将 Agent 请求记成用户完成。当前 T001–T007 技术与记录已完成，U001 待反馈，M1 未开始。
+
+恢复后的第一步：读取本段、Git 状态和部署记录，确认用户实际访问反馈；若失败按具体网络/样式证据排查。验收后进入 M1-L01 手工登录规范，只确认使用场景与验收例子，暂不实现业务代码或引入 Spec Kit。
+
+## 2026-10-08 · M0-L04 用户访问反馈与完成
+
+用户回复「电脑手机均可打开，打开时间约5秒」。按实际反馈记录两种设备访问成功，M0-L04 公开首页与实际访问目标完成，U001 标记完成。该反馈没有给出逐项布局细节，也不是闲置休眠后的冷启动测试；不扩大为 M4 手机核心流程、持续可用性或用户已掌握部署概念。
+
+部署实现由 PR #4 合并；本次上线结果与反馈通过独立文档分支 docs/m0-deployment-checkpoint 保存，文档 PR 经核对后并入 main。没有账号、计划、任务或真实测试者数据，M1 尚未实现。
+
+下一课第一步：M1-L01 手工写登录 spec.md。读取本课日志、当前 Git 和 specs，先解释需求规范是行为约定，围绕测试账号的登录成功、错误密码、空输入、未登录访问和退出讨论验收例子；只写规范、请求用户确认，不实现代码、不安装 Spec Kit。Git 与环境操作继续由 Agent 执行。
+
+文档独立审查发现日志顶部仍停留在 M0-L03，已同步当前状态、已确认的免费套餐和完整任务状态，避免下次恢复课程读到错误进度。
 
 ## 后续记录格式
 

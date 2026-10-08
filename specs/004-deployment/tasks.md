@@ -13,13 +13,13 @@
 
 ## 当前进度
 
-- [x] T001 官方限制与 main=4ecf1e1 已核对；用户反馈已连接，工具可用。资源位置待确认。
+- [x] T001 官方限制与 main 基线已核对；两个连接、用户资源选择、实际 Free 套餐均已确认。
 - [x] T002 正式配置，本地检查通过。
 - [x] T003 部署脚本与 Free 定义已编写。
 - [x] T004 本地请求通过；Linux CI run 37739376003 的真实 Gunicorn、临时 PostgreSQL 迁移与查询通过。
-- [ ] T005 PR、审查与合并。
-- [ ] T006 实际资源和部署。
-- [ ] U001 用户实际网络与手机验收。
-- [ ] T007 实际交付日志。
+- [x] T005 PR #4 通过 CI 和独立审查后 squash 合并；main=2b0efbf，本地与 origin/main 一致。
+- [x] T006 用户创建 Neon Free 项目后，Agent 创建 Render Free 服务；部署 live，真实首页/资源/HTTPS/健康检查与 Neon 18 项迁移核对通过。
+- [x] U001 用户反馈电脑和手机均可打开，约 5 秒；未将其记作闲置冷启动实测。
+- [x] T007 准备、检查、合并、实际上线和用户访问反馈均已记录，下一课入口为 M1-L01。
 
-用户已确认 Render My Workspace，工具核对尚无服务；Neon Free 项目正由用户按网页步骤创建，待其提供项目网址。PR #4 已创建并通过 CI，独立 Agent 审查无实质问题；T005 尚待合并。两个账号连接已可用，不再要求重复登录。实际上线与用户验收分别记录。
+用户已确认 Render My Workspace 并提供 Neon 项目网址；实际套餐分别为 Free 与 free_v3。PR #4 的最终 CI run 37739647375 通过，独立 Agent 审查无实质问题，已合并为 2b0efbf。公开网址为 https://studyhub-pt86.onrender.com/，上线与 Agent 验证完成，用户反馈电脑和手机均可打开、约 5 秒，本课目标完成。实际 Render 健康检查为默认 TCP；/health/ 端点可用，HTTP 检查路径设置留作后续改进，不宣称 Blueprint 的全部字段已实际应用。
