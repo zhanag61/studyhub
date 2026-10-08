@@ -121,6 +121,28 @@ GitHub PR CI 已实际通过：首轮 run 37735201014，以及加入本课文档
 
 本课最终记录按本轮交付结果编写。M0-L03 技术操作完成；用户尚未反馈 GitHub 页面查看或概念解释，不记录为已掌握。线上网站仍未部署，M1–M8 与 Spec Kit 状态不变。下一课 M0-L04 先验证免费托管、数据库条件与实际访问。
 
+## 2026-10-08 · M0-L04 部署准备与账号连接
+
+用户要求上一课完成后进入下一课。Agent 核对本地 main 与远端为 4ecf1e1、干净工作区，进入 feat/m0-render-deploy；创建部署 Issue #3：https://github.com/zhanag61/studyhub/issues/3。按已确认路线仅公开现有首页，不实现 M1 业务。
+
+新增 004-deployment 的规范、技术计划和任务；正式模式使用 PostgreSQL、持久环境密钥、Gunicorn、WhiteNoise、HTTPS 与实际域名许可；加入 Free 服务定义、部署脚本和正式请求检查。没有把密钥存入源码或日志。
+
+本地 Django check、迁移一致性、pip check、差异格式检查通过；一次性 Windows WSGI 请求检查通过：首页、散列静态文件、HTTPS/域名限制、健康检查和错误配置拒绝启动。该检查使用占位数据库，没有连接真实 PostgreSQL；Linux Gunicorn 和临时 PostgreSQL 迁移的证据等待 PR CI。
+
+用户回复 Render/Neon「已连接」。Agent 实际工具核对：Render 仅列出 My Workspace，工具要求用户明确确认工作区；Neon 为非项目限定连接，当前工具没有项目列表或创建项目能力，需要专用于 StudyHub 的项目 ID。已合并为一条简短请求，等待工作区确认与项目页面网址；不再要求重复连接、不索要密码或连接串。等待期间继续检查和 PR。
+
+本课用户浏览器验收尚未进行，真实线上网址尚无。下一步：完成 Linux CI 和独立审查、合并部署配置，再在确认的免费资源中部署；上线后让用户验证普通网络与手机。下一课 M1-L01 在此状态基础上手工写登录规范。
+
+## 2026-10-08 · M0-L04 部署 PR 检查与资源位置
+
+部署实现保存为提交 6be18f4，推送后创建 PR #4：https://github.com/zhanag61/studyhub/pull/4。CI run 37739376003 的 django-checks 与 deployment-smoke 均完成成功；后者实际安装 Python 3.13.14，启动 Linux Gunicorn，执行临时 PostgreSQL 的迁移与查询，并检查正式页面、散列资源、健康检查、HTTPS 和域名行为。
+
+独立 Agent deployment_review 对 main=4ecf1e1 至 head=6be18f4 的全部 18 个文件只读审查，未发现实质缺陷。文档证据更新后再次通过最终 PR CI 才合并；最终提交和合并结果由交付时核对。
+
+用户明确确认「使用 My Workspace」，工具列出该工作区尚无服务。用户反馈不会建立 Neon 项目；Agent 说明现有连接无创建项目能力，并给出控制台四步教学：创建 Free 的 studyhub 项目、AWS Singapore、其他默认，完成后只提供项目页面网址。该步骤是当前工具限制，需要用户网页点选；不是重复账号授权，也不是要求执行终端命令。
+
+待项目 ID 确认后由 Agent 取得连接串、注入环境、执行迁移并创建 Render Free 服务。没有真实 URL 前，T006、U001 保持待办。当前没有购买收费服务，用户实际访问验收与上线状态尚未确认。
+
 ## 后续记录格式
 
 日期 / 课程编号；用户目标；确认的决定；Agent 实现与检查证据；用户实际操作与验收；Git 分支、提交或 PR；用户已解释的概念；未解决问题；下一课第一步。
