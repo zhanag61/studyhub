@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：M1-L02 登录技术计划与任务已编写；下一课 M1-L03 从 T001 稳定配置开始。** [打开 StudyHub 首页](https://studyhub-pt86.onrender.com/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。正式服务使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。登录业务尚未实现，后续功能按课程推进。
+**当前阶段：M1-L03 的 T001 本地密钥与会话配置已完成；T002–T008 未开始。** [打开 StudyHub 首页](https://studyhub-pt86.onrender.com/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。正式服务使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。登录业务尚未实现，本次仅保存本地改动。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
@@ -12,7 +12,7 @@
 - GitHub 课程：[通过 PR 交付改动](docs/lessons/M0-L03.md)
 - 部署课程：[把首页放到线上](docs/lessons/M0-L04.md)
 - 登录规范：[已确认的使用行为](specs/001-login/spec.md)
-- 当前课程：[登录数据流、技术计划与小任务](docs/lessons/M1-L02.md)
+- 当前课程：[稳定本地密钥与会话默认值（T001）](docs/lessons/M1-L03.md)
 - 完整课程：[M0–M8 课程表](docs/CURRICULUM.md)
 - 可复制指令：[如何让 Agent 配合开发](docs/PROMPTS.md)
 - 当前状态：[课程日志](docs/LEARNING_LOG.md)
@@ -72,4 +72,4 @@ GitHub Actions 已在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实�
 - 初期密码恢复由管理员核验测试者后处理；邮件自助找回后置。
 - 托管新增费用约每月 50 元以内，先验证免费 Render + Neon。
 
-数据库、虚拟环境、密钥和备份不进入代码仓库。当前随机开发密钥会在重启时变化；M1 在接入登录之前配置持久的本地密钥。生产环境已经要求服务端密钥和 PostgreSQL；公开多用户应用还需完成 M1–M4 的业务和验收。
+数据库、虚拟环境、密钥和备份不进入代码仓库。本地 DEBUG 模式优先使用 `DJANGO_SECRET_KEY`；未设置时首次生成被 Git 忽略的 `.local-secret-key`，后续重启复用。T001 的会话与登录目的地默认值仅用于本地 DEBUG；固定登录截止时间尚未接入。生产环境仍要求环境密钥和 PostgreSQL，原有设置未改变；公开多用户应用还需完成 M1–M4 的业务和验收。
