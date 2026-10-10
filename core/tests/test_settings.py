@@ -102,6 +102,15 @@ class LocalSecretTests(unittest.TestCase):
         self.assertFalse(self.path.exists())
         self.assertNotIn("private-marker", str(error.exception))
 
+    def test_failed_write_does_not_publish_key_or_leave_temporary_file(self):
+        # 模拟磁盘写入失败；尚未可靠落盘的密钥不能成为后续启动的密钥。
+        with patch("config.local_secret.os.fsync", side_effect=OSError("private-marker")):
+            with self.assertRaises(ImproperlyConfigured) as error:
+                get_or_create_local_secret(self.path)
+        self.assertFalse(self.path.exists())
+        self.assertEqual(list(self.directory.glob("*.tmp")), [])
+        self.assertNotIn("private-marker", str(error.exception))
+
     def test_failed_publication_removes_temporary_file(self):
         publication = "rename" if os.name == "nt" else "link"
         with patch(f"config.local_secret.os.{publication}", side_effect=OSError("private-marker")):
@@ -177,6 +186,18 @@ class SettingsTests(unittest.TestCase):
         result = self.load_settings(DJANGO_SECRET_KEY=env_key)
         self.assertTrue(result["secret_digest"] == hashlib.sha256(env_key.encode()).hexdigest())
         self.assertFalse(self.path.exists())
+
+    def test_environment_key_preserves_existing_valid_local_file(self):
+        local = self.load_settings()
+        original = self.path.read_bytes()
+        modified_at = self.path.stat().st_mtime_ns
+        env_key = get_random_secret_key()
+        result = self.load_settings(DJANGO_SECRET_KEY=env_key)
+        self.assertTrue(result["secret_digest"] == hashlib.sha256(env_key.encode()).hexdigest())
+        self.assertTrue(self.path.read_bytes() == original)
+        self.assertEqual(self.path.stat().st_mtime_ns, modified_at)
+        # 移除环境密钥后，应继续复用原来的本地密钥。
+        self.assertEqual(self.load_settings()["secret_digest"], local["secret_digest"])
 
     def test_environment_key_bypasses_invalid_local_file(self):
         original = b"invalid-private-marker"
