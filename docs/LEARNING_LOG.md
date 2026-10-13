@@ -2,9 +2,9 @@
 
 ## 当前状态
 
-- 当前课程：2026-10-14 用户确认「手机登录和退出等流程正常」，换网访问问题已解决；结合电脑正常登录反馈和全量技术证据完成 T007。M1-L02 计划与 M1-L01 规范继续有效。
+- 当前课程：2026-10-14 用户明确开始 T008；功能分支已推送、PR #7 已创建，初次 CI 的静态清单遗漏已修正并待重新验证。T007 的手机与电脑使用反馈继续有效。
 - 当前规范：specs/001-login/spec.md；plan.md/tasks.md 与 acceptance.md 区分行为、实施、技术与用户证据。T001–T007 完成；T008 待办，不将未单列人工反馈的条件写成用户已手工通过。
-- 下一步：T008 推送功能分支、PR、实际 Linux/PostgreSQL/远端 CI、独立审查和交付。自有手机 8002 已核对归属并停止，元数据标为 stopped；电脑 8001 健康检查正常。不要沿用已停止的手机链接，尚未推送或发布登录功能。
+- 下一步：推送 CI 前置修复，读取最新 head 的真实 SQLite/PostgreSQL/Linux 结果并复审；通过后 squash 合并、同步 main、核对 Render 发布，再记录交付。手机 8002 已停止、电脑 8001 保留；尚未合并或发布登录功能。
 - 当前功能分支：feat/001-login，从干净的 main=86a53b3 建立；关联 Issue #6。恢复时核对真实 Git 状态。
 - Git：部署实现经 PR #4 合并为 2b0efbf；本轮上线与用户反馈记录在 PR #5。恢复时先核对 git status 和 git log，日常从最新 main 建短期功能分支。
 - GitHub：账号 zhanag61；公开仓库 https://github.com/zhanag61/studyhub；首次首页 PR #2 和部署 PR #4 已交付。
@@ -393,6 +393,18 @@ Git：以 `ci: run login tests and prepare acceptance checklist (T007)` 保存�
 恢复核对 feat/001-login、HEAD=f93d09d、工作区干净。按 helper 绝对路径、host/port、实时 Win32 进程与 8002 监听 PID 核对归属，仅停止自有手机验收服务；8002 无剩余监听，8001 健康检查 HTTP200。元数据 .tools/qa/t007-lan-server.json 标记 stopped/stopped_on=2026-10-14，避免后续拿旧链接当活服务；无文件删除、账号/密码/会话重置、业务代码/生产配置或系统网络修改。
 
 更新验收表的实机结果和证据来源、T007 勾选及当前状态；T008 保持待办。33 份 Markdown 的 97 个相对链接可解析，原 A001–A013 条件完全不变，差异仅为九份文档，私有元数据仍被忽略。未重复运行无源码变化的 51 项/部署/工作流检查，未推送、创建 PR、合并或发布。课程记录以 `docs: close T007 after phone acceptance` 保存本地提交；下一课 T008 才读取本轮真实远端 CI/Linux/PostgreSQL、独立审查并核对交付。
+
+## 2026-10-14 · T008 建 PR，修复真实 CI 的静态清单遗漏
+
+用户明确授权「推送分支、创建 PR、核对 CI，并安排另一位 Agent 审查，按既定路线完成交付」。恢复 HEAD=ae3f2ab、工作区干净；fetch 核对 base=origin/main=86a53b39a45af6418fc15c3f31c94ecc29b6f366，功能分支为其后 14 个提交、35 文件，无私有数据库/凭据/工具跟踪。已正常推送 feat/001-login，不强推；创建 PR #7：https://github.com/zhanag61/studyhub/pull/7，Closes #6，base/head 与本地审查完全一致。
+
+另一位 Agent 完整只读审查业务合同、会话/密钥、模板、测试、CI 与部署检查，未发现业务行为问题；不把静态审查写成真实运行通过。初次 run 38434874413 的 django-checks/job115426145258 与 deployment-smoke/job115426145652 均实际失败：51 项测试产生 44 个同因错误，均为缺失 core/favicon.svg 的静态清单。PostgreSQL 临时容器和配置/迁移检查正常，正式部署请求步骤尚未运行，不声称本轮 Linux/PostgreSQL 全部通过。
+
+原因：测试渲染使用 manifest 存储，但正常 test setup 不执行 collectstatic；本机此前有静态构建产物，干净 CI 无此文件。核对 Django 5.2 官方静态文件说明。最小修复是在两个 job 的行为测试前各加入 collectstatic --noinput，保留现有存储与严格清单校验，生产设置/业务代码不变；README 和本机 QA 命令同步前置条件。
+
+新建忽略的独立 STATIC_ROOT，先直接复现缺失清单，再构建后运行 51 项，全部通过；原数据库、密钥、人工账号资料内容和修改时间未变，原 staticfiles 目录未移走/删除。工作流格式与差异检查通过；独立 Agent 专项复审实际修复 diff，未发现顺序或隔离问题。修复以 `ci: build static manifest before authentication tests` 保存后推送，真实新版 CI 尚待核对，不能只凭本机结果合并。
+
+Render 只读核对了用户此前确认的 My Workspace（tea-db3jf6l9fdbs73e2tmu0）与既有 studyhub Free 服务，main 自动部署开启；没有重新创建或购买资源，生产密钥/数据库未读取或修改。当前实际运行仍为旧 M0 部署 dep-db3jrtl9fdbs73e4a91g/2b0efbf，合并后须核对新版本和公开请求。
 
 ## 后续记录格式
 

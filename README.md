@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：T007 完成，用户确认电脑两个账号正常登录及手机核心流程正常；下一课 T008：PR、实际 CI 与交付。** [打开本地工作台](http://127.0.0.1:8001/workspace/)、[查看验收证据](specs/001-login/acceptance.md)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。手机专用 8002 已关闭。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。本课仅保存本地改动，线上登录未发布；本轮 Linux/PostgreSQL/远端 CI 结果在 T008 核对。
+**当前阶段：T008 进行中，[登录 PR #7](https://github.com/zhanag61/studyhub/pull/7) 已创建；首次 CI 发现静态构建前置遗漏，已修正并等待重新验证。** [打开本地工作台](http://127.0.0.1:8001/workspace/)、[查看验收证据](specs/001-login/acceptance.md)。用户已确认电脑正常登录及手机核心流程，手机专用 8002 已关闭。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。PR、真实 CI、审查与发布分别记录，线上登录尚未发布。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
@@ -63,10 +63,13 @@ python -m venv .venv
 ```powershell
 .\.venv\Scripts\python.exe manage.py check
 .\.venv\Scripts\python.exe manage.py makemigrations --check --dry-run
+.\.venv\Scripts\python.exe manage.py collectstatic --noinput
 .\.venv\Scripts\python.exe manage.py test core.tests --noinput
 ```
 
-GitHub Actions 曾在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实际通过配置与迁移检查，M0-L04 也有 Linux Gunicorn、静态文件、HTTPS/域名及临时 PostgreSQL 的运行证据；详见课程日志和 [Actions](https://github.com/zhanag61/studyhub/actions)。T007 已为 SQLite/PostgreSQL 两条 job 加入认证/会话测试，并扩展正式登录请求检查；本轮本地 SQLite 51 项、Windows 正式请求与工作流检查通过。新增流程尚未推送，T008 才读取本轮真实 CI，不将旧 PR 或本地结果当作新流程的远端证据。
+GitHub Actions 曾在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实际通过配置与迁移检查，M0-L04 也有 Linux Gunicorn、静态文件、HTTPS/域名及临时 PostgreSQL 的运行证据；详见课程日志和 [Actions](https://github.com/zhanag61/studyhub/actions)。T007 为 SQLite/PostgreSQL 两条 job 加入认证/会话测试，并扩展正式登录请求检查；本地 SQLite 51 项、Windows 正式请求与工作流检查通过。T008 已创建 PR #7，初次真实 CI 失败及修复明确记录，不将旧 PR 或本地结果当作新流程的远端成功证据。
+
+页面测试使用静态文件清单，需先运行 `collectstatic`。T008 的首次干净 CI 发现缺少该前置步骤，已给两条 job 加入构建；本地已有旧产物不能证明干净环境可运行，真实修复结果仍以 PR 检查为准。
 
 ## 已确认的产品路线
 
