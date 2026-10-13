@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：M1-L03 的 T001 配置、T002 表单、T003 本地验收账号已完成；下一步 T004 接通登录与工作台。** [打开 StudyHub 首页](https://studyhub-pt86.onrender.com/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。正式服务使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。登录路由与工作台尚未接入，本次仅保存本地改动。
+**当前阶段：M1-L03 的 T004 本地登录与工作台已接通，Agent 检查通过，等待用户实际验收；T005–T008 待办。** [打开本地验收页](http://127.0.0.1:8001/login/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。本课仅保存本地改动，线上登录未发布。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
@@ -14,7 +14,8 @@
 - 登录规范：[已确认的使用行为](specs/001-login/spec.md)
 - 配置课程：[稳定本地密钥与会话默认值（T001）](docs/lessons/M1-L03.md)
 - 表单课程：[中文登录表单与模板（T002）](docs/lessons/M1-L03-T002.md)
-- 当前课程：[准备普通本地验收账号（T003）](docs/lessons/M1-L03-T003.md)
+- 账号准备：[普通本地验收账号（T003）](docs/lessons/M1-L03-T003.md)
+- 当前课程：[接通登录与我的工作台（T004）](docs/lessons/M1-L03-T004.md)
 - 完整课程：[M0–M8 课程表](docs/CURRICULUM.md)
 - 可复制指令：[如何让 Agent 配合开发](docs/PROMPTS.md)
 - 当前状态：[课程日志](docs/LEARNING_LOG.md)
@@ -61,7 +62,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe manage.py makemigrations --check --dry-run
 ```
 
-GitHub Actions 已在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实际运行并通过上述检查；具体结果可查看 [Actions](https://github.com/zhanag61/studyhub/actions)。M0-L04 新增 Linux Gunicorn、正式静态文件、HTTPS/域名和临时 PostgreSQL 的检查；它们的真实运行结果记录在课程日志。M1 再加入账号行为测试。
+GitHub Actions 已在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实际运行并通过上述检查；具体结果可查看 [Actions](https://github.com/zhanag61/studyhub/actions)。M0-L04 新增 Linux Gunicorn、正式静态文件、HTTPS/域名和临时 PostgreSQL 的检查；它们的真实运行结果记录在课程日志。M1 已在本地加入登录行为测试；CI 测试步骤与实际 PR 运行留在 T007/T008，不把本地通过当作远端结果。
 
 ## 已确认的产品路线
 
@@ -74,4 +75,4 @@ GitHub Actions 已在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实�
 - 初期密码恢复由管理员核验测试者后处理；邮件自助找回后置。
 - 托管新增费用约每月 50 元以内，先验证免费 Render + Neon。
 
-数据库、虚拟环境、密钥和备份不进入代码仓库。本地 DEBUG 模式优先使用 `DJANGO_SECRET_KEY`；未设置时首次生成被 Git 忽略的 `.local-secret-key`，后续重启复用。T001 的会话与登录目的地默认值仅用于本地 DEBUG；固定登录截止时间尚未接入。生产环境仍要求环境密钥和 PostgreSQL，原有设置未改变；公开多用户应用还需完成 M1–M4 的业务和验收。
+数据库、虚拟环境、密钥和备份不进入代码仓库。本地 DEBUG 模式优先使用 `DJANGO_SECRET_KEY`；未设置时首次生成被 Git 忽略的 `.local-secret-key`，后续重启复用。T001 的默认配置仅用于本地 DEBUG；T004 已在成功登录时写入固定 7 天截止时间，完整边界与重启验证留在 T005。生产环境仍要求环境密钥和 PostgreSQL，原有设置未改变；公开多用户应用还需完成 M1–M4 的业务和验收。
