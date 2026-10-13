@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}我的工作台 · StudyHub{% endblock %}
+
+{% block content %}
+  <section class="workspace personal-workspace" aria-labelledby="workspace-heading">
+    <p class="eyebrow"><span aria-hidden="true"></span>属于你的学习时光</p>
+    <h1 id="workspace-heading">我的工作台</h1>
+    <p class="workspace-greeting">你好，{{ user.get_username }}</p>
+    <p class="workspace-description">很高兴又见到你。留一点时间，接着自己的小目标。</p>
+
+    <div class="workspace-placeholder">
+      <h2>慢慢积累，每一点都值得留下。</h2>
+      <p>学习计划和笔记即将开放，让每一次回来都有新的收获。</p>
+    </div>
+
+    <a class="login-home-link" href="{% url 'core:home' %}">看看公开首页</a>
+  </section>
+{% endblock %}

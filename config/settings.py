@@ -5,7 +5,8 @@ from pathlib import Path
 
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
-from django.core.management.utils import get_random_secret_key
+
+from config.local_secret import get_or_create_local_secret
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -17,8 +18,19 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 if not SECRET_KEY:
     if not DEBUG:
         raise ImproperlyConfigured("关闭 DEBUG 时必须设置 DJANGO_SECRET_KEY。")
-    # M0 没有登录会话；M1 加入账号时再配置本地持久密钥。
-    SECRET_KEY = get_random_secret_key()
+    SECRET_KEY = get_or_create_local_secret(BASE_DIR / ".local-secret-key")
+
+if DEBUG:
+    # T001 只配置本地默认策略；固定登录截止时间在 T004 接入。
+    SESSION_ENGINE = "django.contrib.sessions.backends.db"
+    SESSION_COOKIE_AGE = 7 * 24 * 60 * 60
+    SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+    SESSION_SAVE_EVERY_REQUEST = False
+    SESSION_COOKIE_HTTPONLY = True
+    # 先约定路由名称；本任务尚未创建对应页面和路由。
+    LOGIN_URL = "core:login"
+    LOGIN_REDIRECT_URL = "core:workspace"
+    LOGOUT_REDIRECT_URL = "core:home"
 
 ALLOWED_HOSTS = [
     host.strip()

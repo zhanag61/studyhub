@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}登录 · StudyHub{% endblock %}
+
+{% block content %}
+  <section class="login-layout" aria-labelledby="login-heading">
+    <aside class="login-intro">
+      <p class="eyebrow"><span aria-hidden="true"></span>按自己的节奏，继续成长</p>
+      <h2>让今天的学习，<br>慢慢有了着落。</h2>
+      <p>一个小目标，一点新收获。<br>回来后，继续照顾自己的成长。</p>
+      <span class="login-intro-note">慢慢来，每一步都算数。</span>
+    </aside>
+
+    <div class="login-panel">
+      <h1 id="login-heading">欢迎回来</h1>
+      <p class="login-description">使用你的测试账号，接着上次的小目标。</p>
+
+      <form method="post" class="login-form" novalidate>
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          <div class="form-alert" role="alert">
+            {{ form.non_field_errors }}
+          </div>
+        {% endif %}
+
+        {% for field in form %}
+          <div class="login-field">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {{ field.errors }}
+          </div>
+        {% endfor %}
+
+        <button type="submit" class="button login-submit">
+          登录<span aria-hidden="true">↗</span>
+        </button>
+      </form>
+
+      <a class="login-home-link" href="{% url 'core:home' %}">返回首页</a>
+    </div>
+  </section>
+{% endblock %}

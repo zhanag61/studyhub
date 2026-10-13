@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：M0-L04 已上线并收到用户电脑、手机访问通过的反馈；下一课 M1-L01 登录规范。** [打开 StudyHub 首页](https://studyhub-pt86.onrender.com/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。正式服务使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。登录、计划、任务、笔记、搜索等业务功能将在对应课程实现。
+**当前阶段：T008 进行中，[登录 PR #7](https://github.com/zhanag61/studyhub/pull/7) 已创建；首次 CI 发现静态构建前置遗漏，已修正并等待重新验证。** [打开本地工作台](http://127.0.0.1:8001/workspace/)、[查看验收证据](specs/001-login/acceptance.md)。用户已确认电脑正常登录及手机核心流程，手机专用 8002 已关闭。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。PR、真实 CI、审查与发布分别记录，线上登录尚未发布。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
@@ -11,6 +11,14 @@
 - 第一课：[亲手启动首页](docs/lessons/M0-L01.md)
 - GitHub 课程：[通过 PR 交付改动](docs/lessons/M0-L03.md)
 - 部署课程：[把首页放到线上](docs/lessons/M0-L04.md)
+- 登录规范：[已确认的使用行为](specs/001-login/spec.md)
+- 配置课程：[稳定本地密钥与会话默认值（T001）](docs/lessons/M1-L03.md)
+- 表单课程：[中文登录表单与模板（T002）](docs/lessons/M1-L03-T002.md)
+- 账号准备：[普通本地验收账号（T003）](docs/lessons/M1-L03-T003.md)
+- 登录课程：[接通登录与我的工作台（T004）](docs/lessons/M1-L03-T004.md)
+- 退出课程：[补齐退出与账号切换（T006 提前）](docs/lessons/M1-L03-T006.md)
+- 会话课程：[验证七天期限与重启保持登录（T005）](docs/lessons/M1-L03-T005.md)
+- 当前课程：[自动检查与整体验收（T007）](docs/lessons/M1-L04-T007.md)
 - 完整课程：[M0–M8 课程表](docs/CURRICULUM.md)
 - 可复制指令：[如何让 Agent 配合开发](docs/PROMPTS.md)
 - 当前状态：[课程日志](docs/LEARNING_LOG.md)
@@ -55,9 +63,13 @@ python -m venv .venv
 ```powershell
 .\.venv\Scripts\python.exe manage.py check
 .\.venv\Scripts\python.exe manage.py makemigrations --check --dry-run
+.\.venv\Scripts\python.exe manage.py collectstatic --noinput
+.\.venv\Scripts\python.exe manage.py test core.tests --noinput
 ```
 
-GitHub Actions 已在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实际运行并通过上述检查；具体结果可查看 [Actions](https://github.com/zhanag61/studyhub/actions)。M0-L04 新增 Linux Gunicorn、正式静态文件、HTTPS/域名和临时 PostgreSQL 的检查；它们的真实运行结果记录在课程日志。M1 再加入账号行为测试。
+GitHub Actions 曾在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实际通过配置与迁移检查，M0-L04 也有 Linux Gunicorn、静态文件、HTTPS/域名及临时 PostgreSQL 的运行证据；详见课程日志和 [Actions](https://github.com/zhanag61/studyhub/actions)。T007 为 SQLite/PostgreSQL 两条 job 加入认证/会话测试，并扩展正式登录请求检查；本地 SQLite 51 项、Windows 正式请求与工作流检查通过。T008 已创建 PR #7，初次真实 CI 失败及修复明确记录，不将旧 PR 或本地结果当作新流程的远端成功证据。
+
+页面测试使用静态文件清单，需先运行 `collectstatic`。T008 的首次干净 CI 发现缺少该前置步骤，已给两条 job 加入构建；本地已有旧产物不能证明干净环境可运行，真实修复结果仍以 PR 检查为准。
 
 ## 已确认的产品路线
 
@@ -70,4 +82,4 @@ GitHub Actions 已在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实�
 - 初期密码恢复由管理员核验测试者后处理；邮件自助找回后置。
 - 托管新增费用约每月 50 元以内，先验证免费 Render + Neon。
 
-数据库、虚拟环境、密钥和备份不进入代码仓库。当前随机开发密钥会在重启时变化；M1 在接入登录之前配置持久的本地密钥。生产环境已经要求服务端密钥和 PostgreSQL；公开多用户应用还需完成 M1–M4 的业务和验收。
+数据库、虚拟环境、密钥和备份不进入代码仓库。本地 DEBUG 模式优先使用 `DJANGO_SECRET_KEY`；未设置时首次生成被 Git 忽略的 `.local-secret-key`，后续重启复用。T001 的默认配置仅用于本地 DEBUG；T004 在成功登录时写入固定 7 天截止时间，T005 已通过可控时间验证边界，并在独立临时数据库中验证真实服务/浏览器重启。生产环境仍要求环境密钥和 PostgreSQL，原有设置未改变；公开多用户应用还需完成 M1–M4 的业务和验收。

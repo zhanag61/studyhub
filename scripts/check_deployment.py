@@ -13,6 +13,7 @@ import tempfile
 import time
 from pathlib import Path
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -170,6 +171,23 @@ def main():
             status, headers, _ = request("/", secure=False)
             assert status == 301 and headers["Location"] == f"https://{HOSTNAME}/"
             print(f"PASS: {server_name}；首页、哈希静态文件、健康检查、HTTPS 和域名限制")
+
+            # M1：正式配置也要能显示登录表单，并拒绝匿名个人访问。
+            status, headers, body = request("/login/")
+            assert status == 200, status
+            login_html = body.decode("utf-8")
+            assert "欢迎回来" in login_html
+            for name in ("username", "password", "csrfmiddlewaretoken"):
+                assert f'name="{name}"' in login_html, name
+            assert 'type="password"' in login_html
+            assert "no-store" in headers["Cache-Control"]
+            status, headers, body = request("/workspace/")
+            assert status == 302, status
+            assert urlsplit(headers["Location"]).path == "/login/"
+            assert "你好，" not in body.decode("utf-8")
+            assert "no-store" in headers["Cache-Control"]
+            assert request("/logout/")[0] == 405
+            print("PASS: 正式配置登录表单、未登录工作台跳转、禁止缓存与 GET 不退出")
         finally:
             process.terminate()
             try:

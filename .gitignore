@@ -9,6 +9,7 @@ __pycache__/
 .env.*
 !.env.example
 .local-secret-key
+.local-secret-key.*.tmp
 staticfiles/
 media/
 backups/
