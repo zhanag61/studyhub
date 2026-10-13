@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：T007 自动检查准备与 Agent 本地验证完成，等待用户电脑/手机整体验收。** [打开本地工作台](http://127.0.0.1:8001/workspace/)、[查看五步验收清单](specs/001-login/acceptance.md)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。本课仅保存本地改动，线上登录未发布；本轮 Linux/PostgreSQL/远端 CI 结果在 T008 核对。
+**当前阶段：T007 本地验证完成；手机旧地址因换网失效，已刷新专用 8002 绑定，等待新地址实机复验与整体反馈。** [打开本地工作台](http://127.0.0.1:8001/workspace/)、[查看五步验收清单](specs/001-login/acceptance.md)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。本课仅保存本地改动，线上登录未发布；本轮 Linux/PostgreSQL/远端 CI 结果在 T008 核对。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
