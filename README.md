@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：M1-L03 的 T001 本地密钥与会话配置已完成；T002–T008 未开始。** [打开 StudyHub 首页](https://studyhub-pt86.onrender.com/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。正式服务使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。登录业务尚未实现，本次仅保存本地改动。
+**当前阶段：M1-L03 的 T001 配置、T002 登录表单与模板组件已完成；下一步 T003 准备本地验收账号。** [打开 StudyHub 首页](https://studyhub-pt86.onrender.com/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。正式服务使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。登录路由与工作台尚未接入，本次仅保存本地改动。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
@@ -12,7 +12,8 @@
 - GitHub 课程：[通过 PR 交付改动](docs/lessons/M0-L03.md)
 - 部署课程：[把首页放到线上](docs/lessons/M0-L04.md)
 - 登录规范：[已确认的使用行为](specs/001-login/spec.md)
-- 当前课程：[稳定本地密钥与会话默认值（T001）](docs/lessons/M1-L03.md)
+- 配置课程：[稳定本地密钥与会话默认值（T001）](docs/lessons/M1-L03.md)
+- 当前课程：[中文登录表单与模板（T002）](docs/lessons/M1-L03-T002.md)
 - 完整课程：[M0–M8 课程表](docs/CURRICULUM.md)
 - 可复制指令：[如何让 Agent 配合开发](docs/PROMPTS.md)
 - 当前状态：[课程日志](docs/LEARNING_LOG.md)
