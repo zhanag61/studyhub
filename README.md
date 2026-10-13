@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：本地登录与工作台已接通，提前补齐 T006 退出按钮；等待用户复验“退出 A → 登录 B”，T005、T007、T008 待办。** [打开本地工作台](http://127.0.0.1:8001/workspace/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。本课仅保存本地改动，线上登录未发布。
+**当前阶段：T001–T006 本地实现与检查完成，用户确认两个账号均可正常登录；固定七天期限和服务/浏览器重启已验证，下一步 T007 整体验收与 CI。** [打开本地工作台](http://127.0.0.1:8001/workspace/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。本课仅保存本地改动，线上登录未发布。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
@@ -16,7 +16,8 @@
 - 表单课程：[中文登录表单与模板（T002）](docs/lessons/M1-L03-T002.md)
 - 账号准备：[普通本地验收账号（T003）](docs/lessons/M1-L03-T003.md)
 - 登录课程：[接通登录与我的工作台（T004）](docs/lessons/M1-L03-T004.md)
-- 当前课程：[补齐退出与账号切换（T006 提前）](docs/lessons/M1-L03-T006.md)
+- 退出课程：[补齐退出与账号切换（T006 提前）](docs/lessons/M1-L03-T006.md)
+- 当前课程：[验证七天期限与重启保持登录（T005）](docs/lessons/M1-L03-T005.md)
 - 完整课程：[M0–M8 课程表](docs/CURRICULUM.md)
 - 可复制指令：[如何让 Agent 配合开发](docs/PROMPTS.md)
 - 当前状态：[课程日志](docs/LEARNING_LOG.md)
@@ -76,4 +77,4 @@ GitHub Actions 已在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实�
 - 初期密码恢复由管理员核验测试者后处理；邮件自助找回后置。
 - 托管新增费用约每月 50 元以内，先验证免费 Render + Neon。
 
-数据库、虚拟环境、密钥和备份不进入代码仓库。本地 DEBUG 模式优先使用 `DJANGO_SECRET_KEY`；未设置时首次生成被 Git 忽略的 `.local-secret-key`，后续重启复用。T001 的默认配置仅用于本地 DEBUG；T004 已在成功登录时写入固定 7 天截止时间，完整边界与重启验证留在 T005。生产环境仍要求环境密钥和 PostgreSQL，原有设置未改变；公开多用户应用还需完成 M1–M4 的业务和验收。
+数据库、虚拟环境、密钥和备份不进入代码仓库。本地 DEBUG 模式优先使用 `DJANGO_SECRET_KEY`；未设置时首次生成被 Git 忽略的 `.local-secret-key`，后续重启复用。T001 的默认配置仅用于本地 DEBUG；T004 在成功登录时写入固定 7 天截止时间，T005 已通过可控时间验证边界，并在独立临时数据库中验证真实服务/浏览器重启。生产环境仍要求环境密钥和 PostgreSQL，原有设置未改变；公开多用户应用还需完成 M1–M4 的业务和验收。
