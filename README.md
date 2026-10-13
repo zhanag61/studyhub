@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：T001–T006 本地实现与检查完成，用户确认两个账号均可正常登录；固定七天期限和服务/浏览器重启已验证，下一步 T007 整体验收与 CI。** [打开本地工作台](http://127.0.0.1:8001/workspace/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。本课仅保存本地改动，线上登录未发布。
+**当前阶段：T007 自动检查准备与 Agent 本地验证完成，等待用户电脑/手机整体验收。** [打开本地工作台](http://127.0.0.1:8001/workspace/)、[查看五步验收清单](specs/001-login/acceptance.md)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。本课仅保存本地改动，线上登录未发布；本轮 Linux/PostgreSQL/远端 CI 结果在 T008 核对。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
@@ -17,7 +17,8 @@
 - 账号准备：[普通本地验收账号（T003）](docs/lessons/M1-L03-T003.md)
 - 登录课程：[接通登录与我的工作台（T004）](docs/lessons/M1-L03-T004.md)
 - 退出课程：[补齐退出与账号切换（T006 提前）](docs/lessons/M1-L03-T006.md)
-- 当前课程：[验证七天期限与重启保持登录（T005）](docs/lessons/M1-L03-T005.md)
+- 会话课程：[验证七天期限与重启保持登录（T005）](docs/lessons/M1-L03-T005.md)
+- 当前课程：[自动检查与整体验收（T007）](docs/lessons/M1-L04-T007.md)
 - 完整课程：[M0–M8 课程表](docs/CURRICULUM.md)
 - 可复制指令：[如何让 Agent 配合开发](docs/PROMPTS.md)
 - 当前状态：[课程日志](docs/LEARNING_LOG.md)
@@ -62,9 +63,10 @@ python -m venv .venv
 ```powershell
 .\.venv\Scripts\python.exe manage.py check
 .\.venv\Scripts\python.exe manage.py makemigrations --check --dry-run
+.\.venv\Scripts\python.exe manage.py test core.tests --noinput
 ```
 
-GitHub Actions 已在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实际运行并通过上述检查；具体结果可查看 [Actions](https://github.com/zhanag61/studyhub/actions)。M0-L04 新增 Linux Gunicorn、正式静态文件、HTTPS/域名和临时 PostgreSQL 的检查；它们的真实运行结果记录在课程日志。M1 已在本地加入登录行为测试；CI 测试步骤与实际 PR 运行留在 T007/T008，不把本地通过当作远端结果。
+GitHub Actions 曾在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实际通过配置与迁移检查，M0-L04 也有 Linux Gunicorn、静态文件、HTTPS/域名及临时 PostgreSQL 的运行证据；详见课程日志和 [Actions](https://github.com/zhanag61/studyhub/actions)。T007 已为 SQLite/PostgreSQL 两条 job 加入认证/会话测试，并扩展正式登录请求检查；本轮本地 SQLite 51 项、Windows 正式请求与工作流检查通过。新增流程尚未推送，T008 才读取本轮真实 CI，不将旧 PR 或本地结果当作新流程的远端证据。
 
 ## 已确认的产品路线
 

@@ -1,6 +1,6 @@
 # 001 登录：技术计划
 
-状态：2026-10-09 M1-L02 编写；依据用户已确认的 [spec.md](spec.md)。2026-10-13 T001–T006 已完成本地实现与检查；T006 因用户缺退出反馈提前完成，用户随后确认两个账号均可正常登录。T005 已验证固定期限、独立会话与服务/浏览器重启，T007/T008 完整交付待办。
+状态：2026-10-09 M1-L02 编写；依据用户已确认的 [spec.md](spec.md)。2026-10-13 T001–T006 本地实现与检查完成，T007 的工作流/正式请求检查及 Agent 本地浏览器已完成，等待用户电脑/手机整体验收；证据见 [acceptance.md](acceptance.md)。T008 与本轮 Linux/PostgreSQL/远端 CI 待实际运行。
 
 关联：[Issue #6](https://github.com/zhanag61/studyhub/issues/6)；功能分支 `feat/001-login`；实施顺序见 [tasks.md](tasks.md)。
 
