@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：M1-L03 的 T004 本地登录与工作台已接通，Agent 检查通过，等待用户实际验收；T005–T008 待办。** [打开本地验收页](http://127.0.0.1:8001/login/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。本课仅保存本地改动，线上登录未发布。
+**当前阶段：本地登录与工作台已接通，提前补齐 T006 退出按钮；等待用户复验“退出 A → 登录 B”，T005、T007、T008 待办。** [打开本地工作台](http://127.0.0.1:8001/workspace/)，或查看 [GitHub 源码仓库](https://github.com/zhanag61/studyhub)。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。本课仅保存本地改动，线上登录未发布。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
@@ -15,7 +15,8 @@
 - 配置课程：[稳定本地密钥与会话默认值（T001）](docs/lessons/M1-L03.md)
 - 表单课程：[中文登录表单与模板（T002）](docs/lessons/M1-L03-T002.md)
 - 账号准备：[普通本地验收账号（T003）](docs/lessons/M1-L03-T003.md)
-- 当前课程：[接通登录与我的工作台（T004）](docs/lessons/M1-L03-T004.md)
+- 登录课程：[接通登录与我的工作台（T004）](docs/lessons/M1-L03-T004.md)
+- 当前课程：[补齐退出与账号切换（T006 提前）](docs/lessons/M1-L03-T006.md)
 - 完整课程：[M0–M8 课程表](docs/CURRICULUM.md)
 - 可复制指令：[如何让 Agent 配合开发](docs/PROMPTS.md)
 - 当前状态：[课程日志](docs/LEARNING_LOG.md)

@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
@@ -34,6 +34,12 @@ class StudyHubLoginView(LoginView):
         # 只在成功登录时设置绝对截止时间，浏览不重新计时。
         self.request.session.set_expiry(timezone.now() + timedelta(days=7))
         return response
+
+
+class StudyHubLogoutView(LogoutView):
+    def get_success_url(self):
+        # 退出始终回公开首页；保留 Django 的 POST、CSRF 与会话清除。
+        return reverse("core:home")
 
 
 @never_cache

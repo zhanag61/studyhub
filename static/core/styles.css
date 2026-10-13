@@ -15,7 +15,12 @@ a:focus-visible{outline:3px solid #d1a449;outline-offset:5px}
 .site-nav{display:flex;align-items:center;gap:18px;min-width:0}
 .nav-link{font-size:14px;font-weight:650;color:var(--green);text-decoration:none;white-space:nowrap;padding:8px 0}
 .nav-link:hover{text-decoration:underline;text-underline-offset:4px}
+.nav-logout-form{margin:0}
+.nav-logout{min-height:44px;padding:8px 12px;border:1px solid #bccabd;border-radius:10px;background:var(--paper);color:var(--green);font:inherit;font-size:13px;font-weight:650;white-space:nowrap;cursor:pointer}
+.nav-logout:hover{background:var(--pale)}
+.nav-logout:focus-visible{outline:3px solid #d1a449;outline-offset:3px}
 @media(max-width:640px){.site-nav .edition{display:none}}
+@media(max-width:640px){.site-nav{flex-wrap:wrap;justify-content:flex-end;column-gap:10px;row-gap:4px}}
 .hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:center;gap:48px;padding:56px 40px;margin-block:28px 32px;background:var(--hero-bg);border:1px solid #dfe7ee;border-radius:28px}
 .eyebrow{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:650;letter-spacing:1.4px;color:var(--green);margin:0 0 24px}
 .eyebrow>span{width:7px;height:7px;flex-shrink:0;background:#6a9364;border-radius:50%}
