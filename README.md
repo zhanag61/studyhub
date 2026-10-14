@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：M2-L01 规范续课，创建学习计划的草案等待整份确认。** [需求草案](specs/005-plan-create/spec.md)、[质量清单](specs/005-plan-create/checklists/requirements.md)、[本课说明](docs/lessons/M2-L01-SPEC.md)。已回答标题/说明/目标日期、成功回工作台、同名独立保存及日期限制；长度和完整边界等待随草案审阅。当前未编写技术计划或实现学习计划；Spec Kit 1.2.0 工具接入已通过 [PR #10](https://github.com/zhanag61/studyhub/pull/10)。M1 登录可继续使用，生产账号和邀请后置。
+**当前阶段：M2-L01 规范课已完成，创建学习计划的完整需求已确认。** [已确认规范](specs/005-plan-create/spec.md)、[质量清单](specs/005-plan-create/checklists/requirements.md)、[本课说明](docs/lessons/M2-L01-SPEC.md)。标题/说明/目标日期、成功回工作台、同名独立保存、日期限制、长度和完整边界均已确认。下一课据此编写技术计划与任务，业务实现尚未开始。Spec Kit 1.2.0 经 [PR #10](https://github.com/zhanag61/studyhub/pull/10) 接入，M1 登录继续可用。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
