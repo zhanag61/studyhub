@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：M2-L01 工具准备完成，下一步确认第一份学习计划规范。** Spec Kit 1.2.0 已在独立环境安装并锁定，Codex/PowerShell 验证通过；见 [工具指南](docs/SPECKIT.md) 与 [本课说明](docs/lessons/M2-L01.md)。本课未实现学习计划。M1 的 [PR #7](https://github.com/zhanag61/studyhub/pull/7)、[交付记录 #8](https://github.com/zhanag61/studyhub/pull/8) 已合并，[真实 CI](https://github.com/zhanag61/studyhub/actions/runs/38435955339) 与发布检查通过。[线上登录页](https://studyhub-pt86.onrender.com/login/) 使用既有 Render/Neon Free；learner_a/b 仅在本地，生产账号和邀请后置。手机 8002 已停止，本地 8001 保留。
+**当前阶段：M2-L01 规范续课，创建学习计划的草案等待整份确认。** [需求草案](specs/005-plan-create/spec.md)、[质量清单](specs/005-plan-create/checklists/requirements.md)、[本课说明](docs/lessons/M2-L01-SPEC.md)。已回答标题/说明/目标日期、成功回工作台、同名独立保存及日期限制；长度和完整边界等待随草案审阅。当前未编写技术计划或实现学习计划；Spec Kit 1.2.0 工具接入已通过 [PR #10](https://github.com/zhanag61/studyhub/pull/10)。M1 登录可继续使用，生产账号和邀请后置。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
@@ -21,6 +21,7 @@
 - 整体验收：[自动检查与实际反馈（T007）](docs/lessons/M1-L04-T007.md)
 - 交付课程：[PR、真实 CI、审查与发布（T008）](docs/lessons/M1-L04-T008.md)
 - 工具课程：[接入锁定版本的 Spec Kit（M2-L01）](docs/lessons/M2-L01.md)
+- 规范续课：[确认创建学习计划的行为](docs/lessons/M2-L01-SPEC.md)
 - 完整课程：[M0–M8 课程表](docs/CURRICULUM.md)
 - 可复制指令：[如何让 Agent 配合开发](docs/PROMPTS.md)
 - 当前状态：[课程日志](docs/LEARNING_LOG.md)

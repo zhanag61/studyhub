@@ -63,7 +63,7 @@ CLI、依赖、集成状态、安装脚本与 PowerShell 流程实际通过。�
 
 Git 分支保存历史；.specify/feature.json 指向本机活动规范，官方将它列为不提交的每次检出状态。**切换 Git 分支不会自动切换活动规范**，每次继续工作都核对二者，不静默采用历史登录目录。
 
-正式项目当前没有 feature.json，也没有新业务规范；001-login、000-bootstrap、004-deployment 原样保留。先确认需求，再创建下一份规范；Agent 记录真实目录、分支与本机指针，换电脑时按课程日志恢复。
+工具准备结束时正式项目没有 feature.json 或新业务规范；后续规范续课已建立 005-plan-create，当前状态以课程日志及实际指针为准。001-login、000-bootstrap、004-deployment 原样保留。先确认需求，再创建下一份规范；Agent 记录真实目录、分支与本机指针，换电脑时按课程日志恢复。
 
 本课未启用可选 Git 扩展，Agent 沿用现有 feat/... 与 Issue/PR 流程；核心工具负责文档路径。未安装 GitHub 扩展或调用已弃用的 taskstoissues 技能。
 
