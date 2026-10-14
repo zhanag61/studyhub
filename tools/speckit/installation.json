@@ -1,0 +1,17 @@
+{
+  "tool": "specify-cli",
+  "version": "1.2.0",
+  "source": "https://github.com/github/spec-kit.git",
+  "release_tag": "v1.2.0",
+  "source_commit": "4ca46a0706a662b1edc07086ef16f021820c2db0",
+  "installed_on": "2026-10-14",
+  "validated_platform": "Windows AMD64",
+  "validated_python": "3.13.14",
+  "integration": "codex",
+  "script": "ps",
+  "local_environment": ".tools/speckit/venv",
+  "dependency_lock": "tools/speckit/requirements-windows.txt",
+  "feature_state": ".specify/feature.json",
+  "installed_extensions": [],
+  "business_feature_active_at_adoption": false
+}

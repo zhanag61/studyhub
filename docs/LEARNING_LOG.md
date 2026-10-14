@@ -2,14 +2,14 @@
 
 ## 当前状态
 
-- 当前课程：2026-10-14 T008 已完成登录功能交付，下一课 M2-L01 引入 Spec Kit。
-- 规范：specs/001-login 的 spec/plan/tasks/acceptance/review 保留完整手工 SDD 证据；T001–T008 完成，M2 新规范尚未开始。
-- Git：登录 PR #7 squash 为 f2248aa71d8df0f1041095dd85c07ce93ce46a80，Issue #6 已关闭；后续交付记录见纯文档 [PR #8](https://github.com/zhanag61/studyhub/pull/8)，使用 docs/001-login-delivery 分支走 CI、审查和合并流程。收尾核对 main 同步；恢复时读取 PR 实际状态、status、HEAD 与 origin/main，不把历史 feature 分支当当前分支。
+- 当前课程：2026-10-14 M2-L01 工具准备完成；下一步规范续课，确认「创建自己的学习计划」。M1 的 PR #7/#8 与最终 CI 已实时复核通过。
+- 规范：历史 001-login/000-bootstrap/004-deployment 保留。新增工具规则 .specify/memory/constitution.md v1.0.0；没有活动 feature.json 或学习计划业务规范，下一课按需求确认后创建。
+- Git：M1 交付 main=9b8baf3 已与 origin/main 核对一致；本课从干净基线建立 feat/m2-speckit-setup，关联 Issue #9，接入文件经 PR/真实 CI/只读审查交付后同步 main。恢复时读取实际 Git 和 PR 状态，不把尚未发生的合并记成事实。
 - CI：[run 38435955339](https://github.com/zhanag61/studyhub/actions/runs/38435955339) 的 SQLite/PostgreSQL 各 51 项、Linux Gunicorn 与正式请求全部通过；独立 Agent 审查最终 head 9430198 未发现剩余问题。
 - 线上：https://studyhub-pt86.onrender.com/login/；Render 部署 dep-db76ef6i0phs738o2k20 的 f2248aa 于 2026-10-14 01:16:48（北京时间）live，公开匿名请求通过。现有服务使用公开仓库 URL，合并后未自动触发，Agent 按授权手动发布；后续按真实记录判断是否需手动发布。
 - 用户验收：电脑两个本地账号正常登录、手机登录/提示/布局/退出已确认；复杂边界采用技术证据，不推断用户已手工逐项操作或掌握 Git/SDD。
 - 本地：8002 手机专用服务已停止，8001 保留。learner_a/b 私有凭据、本地数据库、密钥和 QA 工具继续忽略；未在生产创建账号。
-- GitHub：zhanag61/studyhub 公开仓库；没有新购套餐、域名或资源。Spec Kit 尚未安装，M2–M8 业务尚未实现。
+- GitHub：zhanag61/studyhub 公开仓库；没有新购套餐、域名或资源。Spec Kit 1.2.0 独立安装并初始化，业务功能 M2–M8 尚未实现。
 
 ## 已确认决定
 
@@ -416,6 +416,24 @@ Render 元数据虽显示 autoDeploy=yes，但合并后部署与事件记录均�
 PR #7 合并之后的 CI/审查/部署事实通过 docs/001-login-delivery 的纯文档 PR 保存，不把未来发布结果提前编造进源码 PR。文档提交可能领先线上 feature commit，但运行代码完全相同；无需为仅课程文档重复发布。复核相对链接、Git 差异与忽略范围后，推送、核对该 PR 的实际 CI，再合并并同步 main。详见 [T008 教材](lessons/M1-L04-T008.md)、[审查记录](../specs/001-login/review.md)、[部署记录](DEPLOYMENT.md)。
 
 本课解释 PR 是将功能交回 main 的入口，CI 检查是否可重复运行，独立审查对照规范找遗漏，Squash 将功能提交汇成 main 的一个提交，部署让线上运行该版本；未要求用户复制命令或重新做已确认手机流程，也未记录其已掌握这些概念。当前没有已知交付阻塞；免费休眠和公开仓库 URL 需手动部署为已说明限制。下一课第一步：读取仓库、核对 main 和规范上下文，依据官方文档安装并验证锁定版本 Spec Kit，再分课确认「创建学习计划」的字段与验收。
+
+## 2026-10-14 · M2-L01 工具准备与项目规则
+
+用户授权「检查无误后进行下一项」。实时 fetch 确认 main=origin/main=9b8baf3、工作区干净，PR #8 已 merged，最终 run 38490678518 success；Render 的 f2248aa live。再次公开匿名 8 项检查通过，没有复跑无应用变化的本地 51 项。开始 M2-L01 的工具准备，规范确认留续课，不提前实现学习计划。
+
+官方 v1.2.0 于 2026-10-13 发布；核对标签及解引用 commit 4ca46a0706a662b1edc07086ef16f021820c2db0，在 .tools/speckit/venv 独立安装 specify-cli 1.2.0。版本、direct_url 来源与 pip check 通过，完整依赖锁写 tools/speckit/requirements-windows.txt，平台 Windows AMD64/Python 3.13.14；scripts/setup-speckit.ps1 按该锁实际复现成功，scripts/speckit.ps1 固定环境/根目录调用通过。未向 requirements.txt 加依赖。
+
+普通沙箱下新环境 ensurepip 与工具 FileHelper 的目录操作被系统拒绝，按授权在允许的项目工具目录执行，完成初始化；不要求用户复制排错命令，不改全局 PATH、执行策略或系统网络。Python 启动器的定位提示在退出 0 且实际命令通过时不误记为安装失败。
+
+先在忽略的 .tools/qa/m2l01-smoke 初始化，真实 PowerShell 临时规范/计划/任务模板与前置检查通过。setup-tasks 只返回模板，初次要求 tasks 时按预期报告缺失；仅在隔离示例写入模板后通过，未把模板示例当业务规范。正式从 feat/m2-speckit-setup 接入 --here --force --integration codex --script ps --non-interactive；事前逐路径核对冲突，前后原有 Git 文件、数据库、密钥、人工账号资料的字节和修改时间一致。CLI 集成 status=ok，受管理缺失/修改/非法路径均 0；未装任何扩展、未重建 Git、未切换已有业务身份或写入生产。
+
+读取实际安装的 speckit-constitution/SKILL.md，解析 constitution 模板成功；仅整理既有用户路线和 AGENTS，初次成文为 1.0.0，日期 2026-10-14，无占位符或延后治理决定。Sync Impact Report 已生成并核对，提交前移除；没有改模板或命令源。规则覆盖先确认再实现、小步 Django、用户数据归属/私密资料、证据分离、Git 与教学分工；没有把上游示例 TDD/微服务规则变成新约束。
+
+正式项目没有 .specify/feature.json 或新的业务目录；DryRun 不落盘，已有 004-deployment，下一候选编号为 005。官方明确该活动指针与 Git 分支独立且不提交；已有手工规范全部保留。没有自动 Git/GitHub 扩展，继续 Agent 操作 Issue/短期分支/PR。课程表将 M2-L01 的工具准备和首份规范确认拆为两课，符合前课已明确的“本课只做工具准备”。
+
+本课解释「聊天需求→技能/规则→规范→用户确认→计划/任务→实现/验收」，未写成用户已独立掌握命令。CLI 与脚本真实运行通过不等于桌面技能菜单已刷新，当前可由 Agent 直接读取仓库技能。下一步按 docs/lessons/M2-L01.md 的聊天指令询问创建学习计划的字段/提交行为，再生成规范并确认，不写业务代码或技术计划。
+
+工具、教材、规则与锁文件通过本课 PR 保存。独立 Agent 已只读审查 base=9b8baf3 后的 43 文件接入，未发现剩余问题；没有执行安装或网络，运行证据来自根 Agent。真实 CI 和最终 Git 交付在 PR 实际核对后记录；合并后同步 main。仅开发流程接入，运行代码、迁移、生产资源不变，无需部署；M1 线上保持 f2248aa。详细复现和验证见 docs/SPECKIT.md，关联 Issue #9。
 
 ## 后续记录格式
 

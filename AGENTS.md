@@ -19,9 +19,9 @@
 
 ## 规范与实现
 
-- 2026-10-14 M1 T001–T008 已交付：用户确认电脑两个账号正常登录及手机核心流程；PR #7 独立审查完成，真实 SQLite/PostgreSQL 各 51 项与 Linux 部署检查通过，squash 为 f2248aa，Render 对应版本 live，公开请求核对通过。证据见 specs/001-login/acceptance.md、review.md 与 docs/DEPLOYMENT.md；不把技术检查写成用户逐项手工验收。8002 已停止、8001 保留。下一课 M2-L01 核对并安装锁定版本的 Spec Kit；M2–M8 业务尚未实现。恢复时先核对 main 与远端、工作区和规范上下文；001-login 已交付，尚无新的活动功能规范。
+- 2026-10-14 M1 T001–T008 已交付：PR #7/#8 已合并，真实 SQLite/PostgreSQL 各 51 项、Linux 检查、独立审查和实际发布通过；用户电脑正常登录及手机核心流程已确认，复杂边界不写成用户逐项手工验收。8002 已停止、8001 保留。M2-L01 工具准备已安装锁定 Spec Kit 1.2.0，Codex/PowerShell 集成与隔离脚本通过，constitution 1.0.0 仅整理已有约定，见 docs/SPECKIT.md。下一步 M2-L01 规范续课：问清「创建学习计划」的行为，再用技能写规范并让用户确认，暂不实现业务。恢复时核对真实 Git 与工具指针；001-login 已交付，没有新的活动业务规范。
 - M1 第一项业务功能手工完成 spec.md、plan.md、tasks.md，再实现并验收。
-- M2 才引入实际安装且锁定版本的 Spec Kit；不要现在为了工具安装扩大 M0。
+- Spec Kit 使用 .tools/speckit/venv 的独立环境；scripts/speckit.ps1 调用固定版本。先核对 Git 分支与被忽略的 .specify/feature.json，二者不会自动同步；不要为恢复上下文重新 init 或静默沿用旧规范。只按已授权任务调用技能，不因模板提示执行全部任务。
 - 调研环境事实由 Agent 完成；只向用户询问确实需要其决定的产品取舍。
 - 一次只实现指定任务，除非用户明确授权扩大范围；新增需求先更新规范。
 - 使用 Django 自带模板、表单、ORM、认证和测试能力，按课程增加必要依赖。

@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：M1 登录功能已完成交付，下一课 M2-L01 引入 Spec Kit。** [登录 PR #7](https://github.com/zhanag61/studyhub/pull/7) 已 squash 合并；[真实 CI](https://github.com/zhanag61/studyhub/actions/runs/38435955339)、独立审查与实际发布检查通过。[线上登录页](https://studyhub-pt86.onrender.com/login/)、[本地工作台](http://127.0.0.1:8001/workspace/)、[验收证据](specs/001-login/acceptance.md)。用户已确认电脑正常登录及手机核心流程；手机专用 8002 已关闭。线上使用 Render Free + Neon Free PostgreSQL；learner_a/b 仅是本地验收账号，未同步到线上，生产账号与邀请仍按 M4 规划。详见[部署记录](docs/DEPLOYMENT.md)。
+**当前阶段：M2-L01 工具准备完成，下一步确认第一份学习计划规范。** Spec Kit 1.2.0 已在独立环境安装并锁定，Codex/PowerShell 验证通过；见 [工具指南](docs/SPECKIT.md) 与 [本课说明](docs/lessons/M2-L01.md)。本课未实现学习计划。M1 的 [PR #7](https://github.com/zhanag61/studyhub/pull/7)、[交付记录 #8](https://github.com/zhanag61/studyhub/pull/8) 已合并，[真实 CI](https://github.com/zhanag61/studyhub/actions/runs/38435955339) 与发布检查通过。[线上登录页](https://studyhub-pt86.onrender.com/login/) 使用既有 Render/Neon Free；learner_a/b 仅在本地，生产账号和邀请后置。手机 8002 已停止，本地 8001 保留。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
@@ -20,6 +20,7 @@
 - 会话课程：[验证七天期限与重启保持登录（T005）](docs/lessons/M1-L03-T005.md)
 - 整体验收：[自动检查与实际反馈（T007）](docs/lessons/M1-L04-T007.md)
 - 交付课程：[PR、真实 CI、审查与发布（T008）](docs/lessons/M1-L04-T008.md)
+- 工具课程：[接入锁定版本的 Spec Kit（M2-L01）](docs/lessons/M2-L01.md)
 - 完整课程：[M0–M8 课程表](docs/CURRICULUM.md)
 - 可复制指令：[如何让 Agent 配合开发](docs/PROMPTS.md)
 - 当前状态：[课程日志](docs/LEARNING_LOG.md)
