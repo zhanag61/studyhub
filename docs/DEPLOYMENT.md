@@ -2,7 +2,9 @@
 
 ## 当前状态
 
-M0-L04 已实际上线：[StudyHub 首页](https://studyhub-pt86.onrender.com/)。2026-10-08 14:54（北京时间）首次 Render 部署状态为 live，运行版本为 main 的 2b0efbf。Agent 已从本机实际请求验证首页、两个散列静态文件、健康检查和 HTTP → HTTPS。用户明确反馈「电脑手机均可打开，打开时间约5秒」，本课访问目标完成；该时间不是经过闲置休眠后的冷启动测量。
+2026-10-14 M1 登录功能已发布：[线上登录页](https://studyhub-pt86.onrender.com/login/)。Render 部署 dep-db76ef6i0phs738o2k20 的版本精确为 PR #7 的 main=f2248aa，01:16:48（北京时间）live；Agent 的公开匿名请求全部通过。电脑/手机正确登录与退出反馈来自本地服务；learner_a/b 没有同步到线上，生产账号准备仍在 M4。
+
+M0 首次上线为 2026-10-08 14:54（北京时间）的 2b0efbf，用户当时反馈「电脑手机均可打开，打开时间约5秒」；该历史反馈不是新登录版本或休眠冷启动的测量。
 
 Render 使用用户确认的 My Workspace，服务为 studyhub，Singapore、Free：[服务控制台](https://dashboard.render.com/web/srv-db3jrsl9fdbs73e4a5c0)。Neon 使用用户创建的 [studyhub 项目](https://console.neon.tech/app/projects/green-fire-18526792/branches/br-sparkling-tree-b35byzmm)，AWS Singapore，实际订阅为 free_v3，PostgreSQL 18，默认分支 production，数据库 neondb。没有新购付费套餐或域名。
 
@@ -19,6 +21,18 @@ M0-L03 已建立[公开 GitHub 源码仓库](https://github.com/zhanag61/studyhu
 直接创建服务时在环境配置注入 `PYTHON_VERSION=3.13.14`、`DJANGO_DEBUG=false`、随机持久密钥和数据库连接串。已有服务更新环境变量必须合并，不覆盖其他变量。Blueprint 定义 `/health/` 检查路径；实际连接工具创建不支持该字段，服务的 healthCheckPath 为空，当前使用平台默认 TCP 检查。`/health/` 已公开验证返回 200 和进程状态；后续可在服务设置改为 HTTP 检查，M4 再规划数据库就绪检查。
 
 记录真实部署地址、时间、使用套餐、费用和国内普通网络访问结果。分别测试首次打开、刷新、页面样式和手机打开。若失败，记录错误证据并调整这一部署步骤；不能把有代码写成已上线。
+
+## M1-T008：登录版本的实际发布
+
+[PR #7](https://github.com/zhanag61/studyhub/pull/7) 已通过独立审查并 squash 合并为 f2248aa71d8df0f1041095dd85c07ce93ce46a80。修复后 [CI run 38435955339](https://github.com/zhanag61/studyhub/actions/runs/38435955339) 的 SQLite/临时 PostgreSQL 各 51 项、迁移、Linux Gunicorn 与正式请求全部通过。本轮没有新业务模型或迁移文件，生产密钥、数据库连接和套餐保持已有配置，没有创建或重置生产账号。
+
+合并后核对 Render 部署/事件记录，仍只有旧 M0 版本。现有服务通过公开 Git 仓库 URL 创建，虽元数据 autoDeploy=yes，官方明确该方式不支持自动部署；以后不能仅凭该字段认定推送会发布。Agent 在已确认工作区和服务触发一次不清缓存的手动发布，返回 commit=f2248aa；dep-db76ef6i0phs738o2k20 于 2026-10-14 01:16:48（北京时间）live。[Render 发布说明](https://render.com/docs/deploys)、[公开仓库连接说明](https://render.com/docs/web-services)。自动连接 GitHub 账号可另做维护任务，不作为本课交付前置。
+
+本机真实 HTTPS 请求：公开首页 200，新标题「今天，给自己的成长留一点时间。」与登录入口正确；/login/ 200 含用户名/密码/CSRF，Secure/SameSite Cookie 与 no-store；匿名 /workspace/ 302→/login/?next=/workspace/ 且没有个人内容；GET /logout/ 405；/health/ 200/status=ok/no-store；散列 CSS/favicon 200、正确类型与 immutable；HTTP 跳 HTTPS。共 8 项通过，X-Frame-Options=DENY、HSTS max-age=3600。没有记录令牌/Cookie 值或密码，没有尝试本地账号的线上登录。
+
+后续纯文档交付记录可以使 main SHA 领先 Render 的 f2248aa，但运行代码保持完全相同，记录代码版本与文档版本的区别；不为仅教材变化重复发布。未来业务 PR 合并后先核对现有部署是否已覆盖该版本，没有排队/构建且需要发布时才手动触发；等 live 后再核对公开请求。
+
+如该登录版本出现代码故障，可进入 [Render 服务控制台](https://dashboard.render.com/web/srv-db3jrsl9fdbs73e4a5c0) → Manual Deploy → Deploy a specific commit，选此前实际验证的 2b0efbfc01477bc094b1dc475b29510f0bf6ce4a。完成后核对首页、health 和对应 commit；该旧版没有登录入口。本轮未实际执行回退；代码回退不删除数据库/账号/会话，不旋转密钥或逆向迁移，修复仍走新 PR。
 
 ## 当前验证与免费限制
 
@@ -56,5 +70,6 @@ Neon 当前 Free 订阅已通过项目 API 核对；正式邀测前再次核对�
 | 日期 | 版本 / commit | 地址 | 托管与套餐 | 数据库 | 实际验收 | 费用 |
 |---|---|---|---|---|---|---|
 | 2026-10-08 | 2b0efbf / M0 欢迎页 | [公开首页](https://studyhub-pt86.onrender.com/) | Render Free / Singapore | Neon Free / PG18 | Agent 请求和迁移通过；用户电脑/手机均可打开，约 5 秒 | 0 元新增购买，持续监测免费额度 |
+| 2026-10-14 | f2248aa / M1 登录 | [登录页](https://studyhub-pt86.onrender.com/login/) | Render Free / Singapore | 既有 Neon Free | Agent 公开匿名 8 项通过；正确凭据流程为本地用户/CI 证据，线上账号后置 | 0 元新增购买，持续监测免费额度 |
 
 官方参考：[Render 免费服务](https://render.com/docs/free)、[Neon 免费额度](https://neon.com/blog/neon-free-plan-1-gb-per-project)。

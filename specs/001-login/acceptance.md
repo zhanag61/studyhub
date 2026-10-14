@@ -1,6 +1,6 @@
 # 001 登录：验收证据与用户清单
 
-状态：2026-10-14，T007 已完成：手机换网问题解决，用户确认手机登录、提示、布局和退出正常；此前电脑两个账号正常登录已确认，全部规范条件有本地技术证据。手机专用 8002 已停止，8001 正常。T008 尚未开始；新增工作流未推送，远端 CI、Linux Gunicorn 和临时 PostgreSQL 的本轮结果待 PR 实际验证。
+状态：2026-10-14 T001–T008 已交付。用户电脑两账号正常登录与手机核心流程已确认；真实 CI、独立审查、合并和线上发布见下节。手机专用 8002 已停止，8001 保留。技术证据不替代未逐项反馈的用户操作。
 
 依据：[已确认规范](spec.md)、[计划](plan.md)、[任务](tasks.md)。本文件记录证据，不改变 A001–A013 的行为条件。用户明确确认电脑两个账号正常登录和手机核心流程正常；未单列人工反馈的操作依据技术证据验收，不推断用户已亲手验证每个边界或掌握相关概念。
 
@@ -32,7 +32,7 @@ SQLite/部署命令检查前后用户数据库、密钥和账号资料未变；�
 | A012 固定七天与到期拒绝 | [test_sessions.py](../../core/tests/test_sessions.py)：第六天读/写、截止前一秒/截止时/之后、旧 Cookie 重放、新登录和独立期限 | 采用自动时间验证，不要求实等七天 |
 | A013 手机核心流程 | 四组中的 390px/320px 和局域网 390px 无溢出、控件可用；更正地址后手机实机复验 | 用户回复「手机登录和退出等流程正常」，实机通过 |
 
-本表的技术证据目前是本地 SQLite 与 Windows/Edge 结果，不能写成 PostgreSQL 测试通过或本轮远端 CI 已成功。
+本表保留本地 SQLite 与 Windows/Edge 的逐项证据；T008 又在 [真实 CI run 38435955339](https://github.com/zhanag61/studyhub/actions/runs/38435955339) 对 SQLite/临时 PostgreSQL 各运行 51 项并通过 Linux 正式部署检查。远端证据补充如下，仍不扩大为用户手工逐项验收。
 
 ## 本轮使用的五步清单（留作回归参考）
 
@@ -56,8 +56,19 @@ SQLite/部署命令检查前后用户数据库、密钥和账号资料未变；�
 
 随后用户在「检查手机登录、提示、布局和退出」的提问下回复「手机登录和退出等流程正常」。手机实机与访问故障验收通过，结合电脑正常登录反馈和全量技术证据完成 T007。未单列反馈的电脑操作保留为 Agent 证据；本轮已停止自有 8002 并将元数据标为 stopped，旧手机链接不再作为运行入口。以后重做手机回归，由 Agent 核对当前网络并重新准备专用服务。
 
-## 保存与下一步
+## T007 当时的保存与下一步（历史）
 
 本课在 `feat/001-login` 保存工作流、部署检查和验收说明的本地提交，运行工具、数据库和凭据仍忽略。T007 已收尾；下一课 T008 推送、创建 PR、读取实际 CI、独立 Agent 审查及发布核对，实际远端结果尚未完成。出现可复现问题先解决，不提前合并。
 
 官方依据：[Django 测试与独立数据库](https://docs.djangoproject.com/en/5.2/topics/testing/overview/)、[GitHub 临时 PostgreSQL 服务](https://docs.github.com/en/actions/tutorials/use-containerized-services/create-postgresql-service-containers)、[actionlint 固定版本](https://github.com/rhysd/actionlint/releases/tag/v1.7.12)。
+
+## T008：远端 CI、审查与发布证据
+
+- 初次 [run 38434874413](https://github.com/zhanag61/studyhub/actions/runs/38434874413) 两 job 均失败：缺少静态清单，51 项中 44 个同因错误。本机旧 staticfiles 掩盖了干净环境的前置遗漏。
+- 修复 9430198 在两个 job 的测试前分别执行 collectstatic，未关闭严格清单。独立空 STATIC_ROOT 下复现失败、构建后 51 项通过；真实 [run 38435955339](https://github.com/zhanag61/studyhub/actions/runs/38435955339) 的 SQLite 与 PostgreSQL 各 51 项通过，配置/迁移/Linux Gunicorn/静态资源/HTTPS/域名/登录请求通过。
+- [独立审查](review.md) 对完整 35 文件与 CI 修复只读核对，无剩余可复现问题。审查未执行测试，其结论与实际运行证据分开。
+- [PR #7](https://github.com/zhanag61/studyhub/pull/7) squash 为 f2248aa71d8df0f1041095dd85c07ce93ce46a80，Issue #6 自动关闭，本地 main 已同步；后续纯文档 PR 记录实际交付事实。
+- Render dep-db76ef6i0phs738o2k20 的 f2248aa 于 2026-10-14 01:16:48（北京时间）live。公开首页、登录表单/安全 Cookie/禁止缓存、匿名工作台 302、GET 退出 405、health 200、两个散列静态文件及 HTTP→HTTPS 共 8 项通过。详情与回退步骤见 [部署记录](../../docs/DEPLOYMENT.md)。
+- 未将 learner_a/b 或本地数据库同步到线上，未用私有密码做公开请求；线上正确凭据登录/退出未作人工验收。真实 PostgreSQL 上的行为由临时 CI 账号验证；用户实机反馈来自本地服务，不能当作线上账号或 M4 完整多用户权限验收。
+
+线上 QA 结果在本机忽略目录 .tools/qa/t008-public-results.json，不含 Cookie 值、令牌或凭据。当前无已知交付阻塞；后续工具课为 M2-L01，不在 T008 预装 Spec Kit。

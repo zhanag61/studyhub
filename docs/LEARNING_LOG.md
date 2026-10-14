@@ -2,15 +2,14 @@
 
 ## 当前状态
 
-- 当前课程：2026-10-14 用户明确开始 T008；功能分支已推送、PR #7 已创建，初次 CI 的静态清单遗漏已修正并待重新验证。T007 的手机与电脑使用反馈继续有效。
-- 当前规范：specs/001-login/spec.md；plan.md/tasks.md 与 acceptance.md 区分行为、实施、技术与用户证据。T001–T007 完成；T008 待办，不将未单列人工反馈的条件写成用户已手工通过。
-- 下一步：推送 CI 前置修复，读取最新 head 的真实 SQLite/PostgreSQL/Linux 结果并复审；通过后 squash 合并、同步 main、核对 Render 发布，再记录交付。手机 8002 已停止、电脑 8001 保留；尚未合并或发布登录功能。
-- 当前功能分支：feat/001-login，从干净的 main=86a53b3 建立；关联 Issue #6。恢复时核对真实 Git 状态。
-- Git：部署实现经 PR #4 合并为 2b0efbf；本轮上线与用户反馈记录在 PR #5。恢复时先核对 git status 和 git log，日常从最新 main 建短期功能分支。
-- GitHub：账号 zhanag61；公开仓库 https://github.com/zhanag61/studyhub；首次首页 PR #2 和部署 PR #4 已交付。
-- 线上部署：https://studyhub-pt86.onrender.com/；Render Free + Neon Free，首次部署和真实请求验证成功。
-- M1：本地实施/检查、电脑正常登录与手机使用验收完成；T008 交付待办，M2–M8 尚未开始。
-- Spec Kit：未安装，按路线在 M2 引入。
+- 当前课程：2026-10-14 T008 已完成登录功能交付，下一课 M2-L01 引入 Spec Kit。
+- 规范：specs/001-login 的 spec/plan/tasks/acceptance/review 保留完整手工 SDD 证据；T001–T008 完成，M2 新规范尚未开始。
+- Git：登录 PR #7 squash 为 f2248aa71d8df0f1041095dd85c07ce93ce46a80，Issue #6 已关闭；后续交付记录见纯文档 [PR #8](https://github.com/zhanag61/studyhub/pull/8)，使用 docs/001-login-delivery 分支走 CI、审查和合并流程。收尾核对 main 同步；恢复时读取 PR 实际状态、status、HEAD 与 origin/main，不把历史 feature 分支当当前分支。
+- CI：[run 38435955339](https://github.com/zhanag61/studyhub/actions/runs/38435955339) 的 SQLite/PostgreSQL 各 51 项、Linux Gunicorn 与正式请求全部通过；独立 Agent 审查最终 head 9430198 未发现剩余问题。
+- 线上：https://studyhub-pt86.onrender.com/login/；Render 部署 dep-db76ef6i0phs738o2k20 的 f2248aa 于 2026-10-14 01:16:48（北京时间）live，公开匿名请求通过。现有服务使用公开仓库 URL，合并后未自动触发，Agent 按授权手动发布；后续按真实记录判断是否需手动发布。
+- 用户验收：电脑两个本地账号正常登录、手机登录/提示/布局/退出已确认；复杂边界采用技术证据，不推断用户已手工逐项操作或掌握 Git/SDD。
+- 本地：8002 手机专用服务已停止，8001 保留。learner_a/b 私有凭据、本地数据库、密钥和 QA 工具继续忽略；未在生产创建账号。
+- GitHub：zhanag61/studyhub 公开仓库；没有新购套餐、域名或资源。Spec Kit 尚未安装，M2–M8 业务尚未实现。
 
 ## 已确认决定
 
@@ -405,6 +404,18 @@ Git：以 `ci: run login tests and prepare acceptance checklist (T007)` 保存�
 新建忽略的独立 STATIC_ROOT，先直接复现缺失清单，再构建后运行 51 项，全部通过；原数据库、密钥、人工账号资料内容和修改时间未变，原 staticfiles 目录未移走/删除。工作流格式与差异检查通过；独立 Agent 专项复审实际修复 diff，未发现顺序或隔离问题。修复以 `ci: build static manifest before authentication tests` 保存后推送，真实新版 CI 尚待核对，不能只凭本机结果合并。
 
 Render 只读核对了用户此前确认的 My Workspace（tea-db3jf6l9fdbs73e2tmu0）与既有 studyhub Free 服务，main 自动部署开启；没有重新创建或购买资源，生产密钥/数据库未读取或修改。当前实际运行仍为旧 M0 部署 dep-db3jrtl9fdbs73e4a91g/2b0efbf，合并后须核对新版本和公开请求。
+
+## 2026-10-14 · T008 真实 CI、独立审查、合并与发布完成
+
+CI 修复提交 94301989475129afcfa22b0bd351964627b9aea2 推送后，[run 38435955339](https://github.com/zhanag61/studyhub/actions/runs/38435955339) 两条 job 均 success：django-checks/job115429834006 与 deployment-smoke/job115429834404 各 51 项通过。后者真实运行临时 PostgreSQL 迁移/查询、生产错误配置拒绝启动、Linux Gunicorn、散列静态文件、健康检查、HTTPS/域名与正式登录页/匿名工作台/GET 退出检查。初次 run 38434874413 的失败保留为历史证据，不隐藏或改写。
+
+另一位 Agent 只读复审完整 35 文件 base 86a53b39a45af6418fc15c3f31c94ecc29b6f366 → head 94301989475129afcfa22b0bd351964627b9aea2，未发现剩余可复现问题。审查没有执行测试或读取私有数据，运行结论来自上述真实 CI。PR #7 按已授权路线 Squash 合并为 main 的 f2248aa71d8df0f1041095dd85c07ce93ce46a80，Issue #6 自动关闭，本地 main 已快进同步且工作区干净。
+
+Render 元数据虽显示 autoDeploy=yes，但合并后部署与事件记录均无新构建，仍为旧 M0 版本；核对官方说明，公开 Git 仓库 URL 方式不支持自动发布。只对已确认 My Workspace 的现有 studyhub 服务触发一次手动发布，不重建资源、不读改密钥、不新建生产账号。部署 dep-db76ef6i0phs738o2k20 的 commit 精确为 f2248aa，2026-10-14 01:16:48（北京时间）live。公开首页与新文案/登录入口、登录表单/CSRF/Secure Cookie/禁止缓存、匿名工作台 302、不返回个人内容、GET 退出 405、health 200、两个散列静态资源及 HTTP→HTTPS 共 8 项通过，安全头正确。未使用本地验收密码尝试线上登录；线上账号、邀请与完整多用户发布在 M4。
+
+PR #7 合并之后的 CI/审查/部署事实通过 docs/001-login-delivery 的纯文档 PR 保存，不把未来发布结果提前编造进源码 PR。文档提交可能领先线上 feature commit，但运行代码完全相同；无需为仅课程文档重复发布。复核相对链接、Git 差异与忽略范围后，推送、核对该 PR 的实际 CI，再合并并同步 main。详见 [T008 教材](lessons/M1-L04-T008.md)、[审查记录](../specs/001-login/review.md)、[部署记录](DEPLOYMENT.md)。
+
+本课解释 PR 是将功能交回 main 的入口，CI 检查是否可重复运行，独立审查对照规范找遗漏，Squash 将功能提交汇成 main 的一个提交，部署让线上运行该版本；未要求用户复制命令或重新做已确认手机流程，也未记录其已掌握这些概念。当前没有已知交付阻塞；免费休眠和公开仓库 URL 需手动部署为已说明限制。下一课第一步：读取仓库、核对 main 和规范上下文，依据官方文档安装并验证锁定版本 Spec Kit，再分课确认「创建学习计划」的字段与验收。
 
 ## 后续记录格式
 

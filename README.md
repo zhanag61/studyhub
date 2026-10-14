@@ -2,7 +2,7 @@
 
 一个用来学习、也准备逐步投入真实使用的 Django 项目。
 
-**当前阶段：T008 进行中，[登录 PR #7](https://github.com/zhanag61/studyhub/pull/7) 已创建；首次 CI 发现静态构建前置遗漏，已修正并等待重新验证。** [打开本地工作台](http://127.0.0.1:8001/workspace/)、[查看验收证据](specs/001-login/acceptance.md)。用户已确认电脑正常登录及手机核心流程，手机专用 8002 已关闭。[线上首页](https://studyhub-pt86.onrender.com/)使用 Render Free + Neon Free PostgreSQL，真实检查与限制见[部署记录](docs/DEPLOYMENT.md)。PR、真实 CI、审查与发布分别记录，线上登录尚未发布。
+**当前阶段：M1 登录功能已完成交付，下一课 M2-L01 引入 Spec Kit。** [登录 PR #7](https://github.com/zhanag61/studyhub/pull/7) 已 squash 合并；[真实 CI](https://github.com/zhanag61/studyhub/actions/runs/38435955339)、独立审查与实际发布检查通过。[线上登录页](https://studyhub-pt86.onrender.com/login/)、[本地工作台](http://127.0.0.1:8001/workspace/)、[验收证据](specs/001-login/acceptance.md)。用户已确认电脑正常登录及手机核心流程；手机专用 8002 已关闭。线上使用 Render Free + Neon Free PostgreSQL；learner_a/b 仅是本地验收账号，未同步到线上，生产账号与邀请仍按 M4 规划。详见[部署记录](docs/DEPLOYMENT.md)。
 
 教学默认通过聊天指挥 Agent：你提出需求、确认规范并在浏览器验收；Agent 执行代码、Git、排错与检查，再解释结果。下面的终端命令供选学，不要求每条亲手输入。恢复课程时先看课程日志。
 
@@ -18,7 +18,8 @@
 - 登录课程：[接通登录与我的工作台（T004）](docs/lessons/M1-L03-T004.md)
 - 退出课程：[补齐退出与账号切换（T006 提前）](docs/lessons/M1-L03-T006.md)
 - 会话课程：[验证七天期限与重启保持登录（T005）](docs/lessons/M1-L03-T005.md)
-- 当前课程：[自动检查与整体验收（T007）](docs/lessons/M1-L04-T007.md)
+- 整体验收：[自动检查与实际反馈（T007）](docs/lessons/M1-L04-T007.md)
+- 交付课程：[PR、真实 CI、审查与发布（T008）](docs/lessons/M1-L04-T008.md)
 - 完整课程：[M0–M8 课程表](docs/CURRICULUM.md)
 - 可复制指令：[如何让 Agent 配合开发](docs/PROMPTS.md)
 - 当前状态：[课程日志](docs/LEARNING_LOG.md)
@@ -67,9 +68,9 @@ python -m venv .venv
 .\.venv\Scripts\python.exe manage.py test core.tests --noinput
 ```
 
-GitHub Actions 曾在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实际通过配置与迁移检查，M0-L04 也有 Linux Gunicorn、静态文件、HTTPS/域名及临时 PostgreSQL 的运行证据；详见课程日志和 [Actions](https://github.com/zhanag61/studyhub/actions)。T007 为 SQLite/PostgreSQL 两条 job 加入认证/会话测试，并扩展正式登录请求检查；本地 SQLite 51 项、Windows 正式请求与工作流检查通过。T008 已创建 PR #7，初次真实 CI 失败及修复明确记录，不将旧 PR 或本地结果当作新流程的远端成功证据。
+[PR #7 的 CI run 38435955339](https://github.com/zhanag61/studyhub/actions/runs/38435955339) 实际通过：SQLite 与临时 PostgreSQL 各运行 51 项测试；配置、迁移一致性、Linux Gunicorn、散列静态文件、HTTPS/域名与正式登录请求检查通过。独立 Agent 只读审查通过；PR #7 已合并，Render 实际发布 f2248aa，公开请求另行通过。历史 M0 结果见课程日志，不能替代本轮检查。
 
-页面测试使用静态文件清单，需先运行 `collectstatic`。T008 的首次干净 CI 发现缺少该前置步骤，已给两条 job 加入构建；本地已有旧产物不能证明干净环境可运行，真实修复结果仍以 PR 检查为准。
+页面测试使用静态文件清单，需先运行 `collectstatic`。首次干净 CI run 38434874413 因缺少该前置步骤失败；两条 job 都补齐构建后，新 run 38435955339 全部通过。本机旧产物不能替代干净环境验证。
 
 ## 已确认的产品路线
 
@@ -82,4 +83,4 @@ GitHub Actions 曾在 [PR #2](https://github.com/zhanag61/studyhub/pull/2) 实�
 - 初期密码恢复由管理员核验测试者后处理；邮件自助找回后置。
 - 托管新增费用约每月 50 元以内，先验证免费 Render + Neon。
 
-数据库、虚拟环境、密钥和备份不进入代码仓库。本地 DEBUG 模式优先使用 `DJANGO_SECRET_KEY`；未设置时首次生成被 Git 忽略的 `.local-secret-key`，后续重启复用。T001 的默认配置仅用于本地 DEBUG；T004 在成功登录时写入固定 7 天截止时间，T005 已通过可控时间验证边界，并在独立临时数据库中验证真实服务/浏览器重启。生产环境仍要求环境密钥和 PostgreSQL，原有设置未改变；公开多用户应用还需完成 M1–M4 的业务和验收。
+数据库、虚拟环境、密钥和备份不进入代码仓库。本地 DEBUG 模式优先使用 `DJANGO_SECRET_KEY`；未设置时首次生成被 Git 忽略的 `.local-secret-key`，后续重启复用。T001 的默认配置仅用于本地 DEBUG；T004 在成功登录时写入固定 7 天截止时间，T005 已通过可控时间验证边界，并在独立临时数据库中验证真实服务/浏览器重启。生产环境仍要求环境密钥和 PostgreSQL，原有设置未改变；公开多用户应用还需完成 M2–M4 的业务和验收。
