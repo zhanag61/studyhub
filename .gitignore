@@ -18,3 +18,11 @@ backups/
 playwright-report/
 .DS_Store
 Thumbs.db
+
+# Only source skill files belong in Git; local agent state stays private.
+.agents/*
+!.agents/skills/
+.agents/skills/*
+!.agents/skills/speckit-*/
+.agents/skills/speckit-*/**
+!.agents/skills/speckit-*/SKILL.md

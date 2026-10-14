@@ -8,3 +8,5 @@
 *.sh text eol=lf
 *.svg text eol=lf
 *.txt text eol=lf
+*.ps1 text eol=lf
+.specify/** text eol=lf
