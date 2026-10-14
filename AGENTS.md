@@ -19,7 +19,7 @@
 
 ## 规范与实现
 
-- 2026-10-14 M1 已交付，Spec Kit 1.2.0 经 PR #10 接入。当前 M2-L01 规范课已完成：用户回复「确认这份完整规范」，specs/005-plan-create/spec.md 为 Confirmed；16 项清单仅是文档质量检查，实施/用户功能验收未开始。真实 Git 分支 feat/005-plan-create，本机 feature.json 指向该规范；恢复时核对二者与日志。下一课编写技术计划并拆小任务，暂不直接实现；不要重复询问已确认行为，也不要重新调用 specify 创建第二份规范。
+- 2026-10-14 M1 已交付，Spec Kit 1.2.0 经 PR #10 接入。当前 M2-L01 规范与方案续课已完成：specs/005-plan-create/spec.md 为 Confirmed；plan.md、research.md、data-model.md、contracts/web.md、quickstart.md、tasks.md 已生成，8 项实施任务全部待办，业务代码与用户功能验收未开始。真实 Git 分支 feat/005-plan-create，本机 feature.json 指向该规范；恢复时核对二者与日志。下一课只做 T001 的模型、迁移文件和临时测试库检查；原本地数据库 migrate 在 T003 接通页面前，不能提前改变当前数据库/页面或生产。不要重复询问已确认行为，不重新 specify 或 setup-plan 覆盖已有设计，不因清单生成而自动执行全部任务。
 - M1 第一项业务功能手工完成 spec.md、plan.md、tasks.md，再实现并验收。
 - Spec Kit 使用 .tools/speckit/venv 的独立环境；scripts/speckit.ps1 调用固定版本。先核对 Git 分支与被忽略的 .specify/feature.json，二者不会自动同步；不要为恢复上下文重新 init 或静默沿用旧规范。只按已授权任务调用技能，不因模板提示执行全部任务。
 - 调研环境事实由 Agent 完成；只向用户询问确实需要其决定的产品取舍。

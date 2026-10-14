@@ -28,7 +28,9 @@ M0 的 `specs/000-bootstrap/` 保存本次用户已确认的起步准备范围�
 
 ## M2 已引入 Spec Kit
 
-2026-10-14 M2-L01 工具准备已安装并初始化 Spec Kit 1.2.0，源码 commit 与依赖锁已验证；Codex 技能、PowerShell 脚本和集成状态实际通过。工具用独立环境，不混进网站运行依赖，项目规则为 1.0.0；见 [实际安装与调用](SPECKIT.md)、[本课说明](lessons/M2-L01.md)。第一份工具业务规范 005-plan-create 已在规范续课生成；用户已确认整份规范，下一课编写技术计划与任务，实施未开始。
+2026-10-14 M2-L01 工具准备已安装并初始化 Spec Kit 1.2.0，源码 commit 与依赖锁已验证；Codex 技能、PowerShell 脚本和集成状态实际通过。工具用独立环境，不混进网站运行依赖，项目规则为 1.0.0；见 [实际安装与调用](SPECKIT.md)、[本课说明](lessons/M2-L01.md)。第一份工具业务规范 005-plan-create 已在规范续课生成，用户已确认整份规范；方案续课已完成设计与拆任务，实施未开始。
+
+当前方案续课已用项目内 [speckit-plan](../.agents/skills/speckit-plan/SKILL.md) 与 [speckit-tasks](../.agents/skills/speckit-tasks/SKILL.md) 生成 [技术计划](../specs/005-plan-create/plan.md) 和 [8 项任务](../specs/005-plan-create/tasks.md)，配套调研、数据模型、页面契约与未来验收指南。实施均待办；下一步只做 T001，不重新生成规范或覆盖已有计划。说明见 [方案课](lessons/M2-L01-PLAN.md)。
 
 官方同时支持 GitHub release 源码安装与 PyPI 的 `specify-cli`，也支持 Windows PowerShell。初始化现有目录前检查差异，确保不会覆盖课程记录和手工规范。
 
