@@ -4,7 +4,7 @@
 
 - 当前课程：2026-10-14 T008 已完成登录功能交付，下一课 M2-L01 引入 Spec Kit。
 - 规范：specs/001-login 的 spec/plan/tasks/acceptance/review 保留完整手工 SDD 证据；T001–T008 完成，M2 新规范尚未开始。
-- Git：登录 PR #7 squash 为 f2248aa71d8df0f1041095dd85c07ce93ce46a80，Issue #6 已关闭；交付记录使用短期 docs/001-login-delivery 分支并经 PR 合入，最终同步 main。恢复时核对真实 status、HEAD 与 origin/main，不把历史 feature 分支当当前分支。
+- Git：登录 PR #7 squash 为 f2248aa71d8df0f1041095dd85c07ce93ce46a80，Issue #6 已关闭；后续交付记录见纯文档 [PR #8](https://github.com/zhanag61/studyhub/pull/8)，使用 docs/001-login-delivery 分支走 CI、审查和合并流程。收尾核对 main 同步；恢复时读取 PR 实际状态、status、HEAD 与 origin/main，不把历史 feature 分支当当前分支。
 - CI：[run 38435955339](https://github.com/zhanag61/studyhub/actions/runs/38435955339) 的 SQLite/PostgreSQL 各 51 项、Linux Gunicorn 与正式请求全部通过；独立 Agent 审查最终 head 9430198 未发现剩余问题。
 - 线上：https://studyhub-pt86.onrender.com/login/；Render 部署 dep-db76ef6i0phs738o2k20 的 f2248aa 于 2026-10-14 01:16:48（北京时间）live，公开匿名请求通过。现有服务使用公开仓库 URL，合并后未自动触发，Agent 按授权手动发布；后续按真实记录判断是否需手动发布。
 - 用户验收：电脑两个本地账号正常登录、手机登录/提示/布局/退出已确认；复杂边界采用技术证据，不推断用户已手工逐项操作或掌握 Git/SDD。
